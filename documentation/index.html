@@ -1,0 +1,866 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<head lang="en">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
+	<title>Rearrange Letters 2 Documentation</title>
+	<!-- Framework CSS -->
+	<link rel="stylesheet" href="assets/blueprint-css/screen.css" type="text/css" media="screen, projection">
+	<link rel="stylesheet" href="assets/blueprint-css/print.css" type="text/css" media="print">
+	<!--[if lt IE 8]><link rel="stylesheet" href="assets/blueprint-css/ie.css" type="text/css" media="screen, projection"><![endif]-->
+	<link rel="stylesheet" href="assets/blueprint-css/plugins/fancy-type/screen.css" type="text/css" media="screen, projection">
+	<style type="text/css" media="screen">
+		p, table, hr, .box { margin-bottom:25px; }
+		.box p { margin-bottom:10px; }
+	</style>
+    <link rel="stylesheet" href="assets/blueprint-css/prettify.css">
+	<script src="assets/js/prettify.js" defer></script>
+    <script>
+	window.onload = (function(){ prettyPrint(); });
+	</script>
+</head>
+
+
+<body>
+	<div class="container">
+	
+		<h3 class="center alt">&ldquo;Rearrange Letters 2&rdquo; Documentation by &ldquo;demonisblack&rdquo; v2.7</h3>
+		
+		<hr>
+		
+		<h1 class="center">&ldquo;Rearrange Letters 2&rdquo;</h1>
+		
+		<div class="borderTop">
+			<div class="span-6 colborder info prepend-1">
+				<p class="prepend-top">
+					<strong>
+					Created: 18/4/2019<br>
+					By: demonisblack<br>
+					Email: <a href="mailto:demonisblack@gmail.com">demonisblack@gmail.com</a>
+					</strong>
+				</p>
+			</div><!-- end div .span-6 -->		
+	
+			<div class="span-12 last">
+				<p class="prepend-top append-0">Thank you for purchasing the game. If you have any questions that are beyond the scope of this help file, please feel free to email via profile page contact form <a href="https://codecanyon.net/user/demonisblack">here</a>. Thanks so much!</p>
+			</div>
+		</div><!-- end div .borderTop -->
+		
+		<hr>
+		
+		<h2 id="toc" class="alt">Table of Contents</h2>
+		<ol class="alpha">
+        	<li><a href="#introduction">Introduction</a></li>
+            <li><a href="#gettingStarted">Getting Started</a></li>
+            <li><a href="#htmlStructure">HTML Structure</a></li>
+			<li><a href="#cssFiles">CSS Files and Structure</a></li>
+			<li><a href="#javascript">JavaScript</a></li>
+            <li><a href="#gameFunctions">Game Functions</a></li>
+            <li><a href="#gameAssets">Game Assets</a></li>
+            <li><a href="#XMLFile">XML File</a></li>
+            <li><a href="#buildinEditorTool">Build-in Edit Tools</a></li>
+            <li><a href="#questionTemplates">Question Templates</a></li>
+            <li><a href="#saveXML">Save XML with password</a></li>
+            <li><a href="#scoreboard">Scoreboard</a></li>
+            <li><a href="#compatibility">Compatibility</a></li>
+			<li><a href="#credits">Sources and Credits</a></li>
+            <li><a href="#changelog">Changelog</a></li>
+            <li><a href="#support">Support Policy</a></li>
+		</ol>
+		
+		<hr>
+        
+        <h3 id="introduction"><strong>A) Introduction</strong> - <a href="#toc">top</a></h3>
+        <p>Rearrange Letters 2 is a HTML5 game where you can arrange the letters and make the right word by given description as a clue, it is rebuild without canvas which can support responsive for landscape and portrait layout, and include the new drag and drop sentence question.</p>
+        
+        <p>The ZIP package contains the game with 1200×650 resolution that scales to fit the whole screen device, but it may not be perfectly full screen.</p>
+        
+        <img src="assets/images/feature1.jpg" /><br>
+        <img src="assets/images/feature2.jpg" /><br>
+        <img src="assets/images/feature3.jpg" /><br>
+        <hr>
+        
+        <h3 id="gettingStarted"><strong>B) Getting Started</strong> - <a href="#toc">top</a></h3>
+		<p>To install the game just upload folder 'game' to your server. The game won't run locally with some browser like Chrome due to some security mode.</p>        
+        <p>You need a website that runs PHP to make facebook share button work, and make sure to change Facebook Open Graph meta and Twitter meta in index.html, just replace [GAME_URL] to your game URL.</p>
+        <pre class="prettyprint linenums">
+        &lt;!-- for Facebook --&gt;
+        &lt;meta property=&quot;og:image&quot; content=&quot;[GAME_URL]/share.jpg&quot; /&gt;
+        &lt;meta property=&quot;og:url&quot; content=&quot;[GAME_URL]&quot; /&gt;
+        
+        &lt;!-- for Twitter --&gt;
+        &lt;meta name=&quot;twitter:image&quot; content=&quot;[GAME_URL]/share.jpg&quot; /&gt;
+        </pre>
+        
+        <p>You can easily customize game text and settings in game.js file
+        
+        <pre class="prettyprint linenums">
+        var screenSettings = {
+            stageW:1200, //game width
+            stageH:650, //game height
+            portraitW:380, //game portrait width
+            portraitH:600, //game portrait height
+            fitToScreen:true, //fit to browser screen
+            maintainAspectRatio:true, //maintain aspect ratio
+            viewportMode:{enable:false, viewport:"portrait", text:"Rotate your device <br/>to portrait"}, //device viewport mode, portrait or landscape
+        }
+        
+        //title settings
+        var titleSettings = {
+                                text:["REARRANGE","LETTERS|2"], //array for new lines, use | for spacing
+                                fontSize:120,
+                                lineHeight:120,
+                                shadow:15,
+                                color:"#ccff00",
+                                spaceX:10,
+                                spaceY:10,
+                                x:50,
+                                y:40,
+                                tween:0.3,
+                                portrait:{
+                                            fontSize:40,
+                                            lineHeight:40,
+                                            spaceX:5,
+                                            spaceY:5,
+                                            x:50,
+                                            y:35,
+                                            tween:0.3
+                                        }
+                            }
+        
+        //category settings
+        var categorySettings = {
+                                    status:true, //show/hide category select page
+                                    allOption:true, //add ALL category select option
+                                    allText:"ALL", //text for all category select option
+                                    sort:true, //sort category alphatically, except All option always at last
+                                    breadcrumb:" > ",//symbol for breadcrumb
+                                    breadcrumbTop:"BACK" //breadcrumb top level name
+                                };
+                                
+        //question settings
+        var questionSettings = {
+                                    totalQuestionLimit:0, //set more than 0 to limit total questions,
+                                    randomQuestion:true, //true or false to enable randomize questions
+                                    loader:"LOADING QUESTION...", //loader text display
+                                    totalText:"[NUMBER]/[TOTAL]", //total question text display
+                                    correctText:"FOUND NEW WORD!", //correct answer text display
+                                    scoreText:"YOU SCORE 1PTS!", //score text display
+                                    answerLeftText:"ANSWER LEFT : [NUMBER]" //answer left text display
+                                };
+        
+        //timer settings
+        var timerSettings = {
+                                status:true, //true or false to enable timer
+                                mode:"default", //default or countdown mode
+                                session:"all", //single for one questions, all for whole session
+                                timer:25000, //total timer for countdown mode
+                                timesupText:"TIME'S UP", //time"s up text display
+                            };
+        
+        //reveal answer settings
+        var revealAnswerSettings = {
+                                    status:true, //true or false to enable reveal answer
+                                    timer:10000, //10 second timer to show reveal button
+                                    tween:1 //reveal answer animation tween speed
+                                }
+        
+        //drag settings
+        var dragSettings = {
+                                shadow:15, //letters normal shadow
+                                shadowHover:20, //letters dragging shadow
+                                hoverScale:1.3, //letters dragging scale
+                                hoverTween:1, //letters scale animation tween speed
+                                answerAnimateTween:0.4, //answer aniamtion tween speed
+                                answerAnimateScale:1.3 //answer aniamtion scale
+                            }
+        
+        //single letter settings
+        var wordProperty = {
+                                fontSize:120,
+                                lineHeight:120,
+                                color:"#ccff00",
+                                x:50,
+                                y:40,
+                                spaceX:10,
+                                spaceY:10,
+                                width:80
+                            };
+            
+        //single letter unused settings	(multiple word with different length)		
+        var wordBottomProperty = {
+                            fontSize:100,
+                            lineHeight:100,
+                            color:"#ccc",
+                            x:50,
+                            y:52,
+                            spaceX:10,
+                            spaceY:10,
+                            width:80
+                        };
+        
+        //sentence settings
+        var sentenceProperty = {
+                                fontSize:60,
+                                lineHeight:60,
+                                color:"#ccff00",
+                                x:50,
+                                y:40,
+                                spaceX:20,
+                                spaceY:10,
+                                width:70,
+                            };
+        
+        //description settings
+        var descriptionProperty = {
+                            fontSize:30,
+                            lineHeight:30,
+                            color:"#fff",
+                            align:"center",
+                            top:65,
+                            left:10,
+                            width:80,
+                            height:20,
+                        };
+                        
+        //background settings
+        var backgroundProperty = {
+                            top:0,
+                            left:0,
+                            width:100,
+                            height:100,
+                        };
+                        
+        //video settings
+        var videoProperty = {
+                            top:15,
+                            left:30,
+                            width:40,
+                            height:41,
+                            autoplay:true,
+                            controls:true
+                            
+                        };
+        
+        //audio settings				
+        var audioSettings = {
+                                description:500, //.5 second delay to play description
+                                answer:1000, //1 second delay to play description
+                        };
+        
+        //result settings
+        var resultSettings = {
+                            mode:"score", //display result by "score" or "timer"
+                            reverse:false, //display result in reverse
+                            scoreText: "YOUR SCORE : [NUMBER]", //score text display
+                            timerText: "BEST TIME : [NUMBER]" //timer text display
+                        };
+        
+        //Social share, [SCORE] will replace with game score
+        var shareSettings = {
+            shareEnable:true, //toggle share
+            shareTitle:"Highscore on Rearrange Letters 2 Game is [SCORE]", //social share score title
+            shareMessage:"[SCORE] is mine new highscore on Rearrange Letters 2 Game! Try it now!", //social share score message
+        }
+        </pre>
+        
+        <p>If you wish to customize the question, description and background image via XML file, check out <a href="#XMLFile">XML File</a> section.</p>
+        <p>If you wish to customize the question, description and background image with build-in tool, check out <a href="#buildinEditorTool">Build-In Editor Tool</a> section.</p>
+        <p>If you wish to check out question templates, check out <a href="#questionTemplates">Question Templates</a> section.</p>
+        <p>If you wish to enable scorebard, check out <a href="#scorebard">Scorebard</a> section.</p>
+        
+        <p>
+        The sound can be easily disabled to avoid compatibility issues in sound.js file:
+        <pre class="prettyprint linenums">
+        var enableMobileSound = true;
+        </pre>
+        </p>
+        <hr>
+		
+		<h3 id="htmlStructure"><strong>C) HTML Structure</strong> - <a href="#toc">top</a></h3>
+        <p>The page start with the loader wrapper that covering the whole screen in the body. It shows loader progress when calls the function <strong>initPreload()</strong></p>
+        <pre class="prettyprint linenums">
+        &lt;!-- PERCENT LOADER START--&gt;
+    	&#x3C;div id=&#x22;mainLoader&#x22;&#x3E;&#x3C;span&#x3E;0&#x3C;/span&#x3E;&#x3C;/div&#x3E;
+        &lt;!-- PERCENT LOADER END--&gt;
+        </pre>
+        
+        <p>Follow by one HTML tag in the body. The game start initiatie by calls the main function of the game <strong>initMain()</strong>.</p>
+        <pre class="prettyprint linenums">
+        &lt;!-- CONTENT START--&gt;
+        &lt;div id=&quot;mainHolder&quot;&gt;
+        	
+        &lt;/div&gt;
+        &lt;!-- CONTENT END--&gt;
+        </pre>
+		<hr>
+
+		<h3 id="cssFiles"><strong>D) CSS Files and Structure</strong> - <a href="#toc">top</a></h3>
+		<p>I'm using two CSS files in this game. The first one is a generic reset file. Many browser interpret the default behavior of html elements differently. By using a general reset CSS file, we can work round this. This file also contains some general styling, such as anchor tag colors, font-sizes, etc. Keep in mind, that these values might be overridden somewhere else in the file.</p>
+		<p>The second file contains all of the specific stylings for the page.</p>
+        <hr>
+		
+        
+		<h3 id="javascript"><strong>E) JavaScript</strong> - <a href="#toc">top</a></h3>
+		
+		<p>This game using Javascript files below.</p>
+		
+		<ol>
+			<li>
+                <strong>jQuery</strong> is a cross-platform JavaScript library designed to simplify the client-side scripting of HTML.<br/><br/>
+            </li>
+            
+            <li>
+                <strong>Detect Mobile Browser</strong> is a open source scripts to detect mobile browsers and phones.<br/><br/>
+            </li>
+            
+            <li>
+                <strong>CreateJs plugin</strong> is a suite of modular libraries and tools which work together to create interactive content on open web technologies via HTML5.<br/><br/>
+            </li>
+            
+            <li>
+                <strong>TweenMax</strong> is an extremely fast, lightweight, and flexible animation tool that serves as the foundation of the GreenSock Animation Platform (GSAP).<br/><br/>
+            </li>
+            
+            <li>
+                <strong>The game have the following js files</strong>
+                <ul>
+                	<li><strong>init.js :</strong> check if browser or device support <br/><br/></li>
+                    <li><strong>loader.js :</strong> loader to load all game images<br/><br/></li>
+                    <li><strong>main.js :</strong> initiate game setup and browser resize function<br/><br/></li>
+                    <li><strong>game.js :</strong> game play and logics<br/><br/></li>
+                    <li><strong>score.js :</strong> scoreboard and server<br/><br/></li>
+                    <li><strong>sound.js :</strong> sound event<br/><br/></li>
+                    <li><strong>plugins.js :</strong> additonal useful plugins<br/><br/></li> 
+                </ul>
+            </li>
+		</ol>
+        
+        <p>Complete game flow:</p>
+		<ol>
+        	<li>The index.html file start init.js for browser detection</li>
+            <li>If browser is supported, init loader.js to start load asserts with loading progress</li>
+            <li>When all asserts contained in "/assets" folder are loaded, the game start construct from main.js thats shows game menu</li>
+            <li>If user click the screen in game menu, the game will start category page with game.js</li>
+            <li>If user click select category in category page, the game will start with first question</li>
+            <li>If user solve the right word, user will score point and move to next question</li>
+            <li>If user cannot solve the word on time, game result will shows</li>
+            <li>When all the question is complete, game result will shows</li>
+            <li>If user click the screen in game result, it will restart the game</li>
+        </ol>
+		
+		<hr>
+        
+        <h3 id="gameFunctions"><strong>F) Game Functions</strong> - <a href="#toc">top</a></h3>
+		
+		<p>The most important functions used for page.</p>
+        <ul>
+        	<li>
+                <strong>checkBrowser()</strong><br/>
+                This function is runs for browser detection<br/><br/>
+            </li>
+            
+            <li>
+                <strong>checkMobileEvent()</strong><br/>
+                This function runs for mobile event<br/><br/>
+            </li>
+        </ul>
+        
+        <p>The most important functions used for game.</p>
+        <ul>
+        	<li>
+                <strong>initMain()</strong><br/>
+                This function build canvas<br/><br/>
+            </li>
+            
+            <li>
+                <strong>startGame()</strong><br/>
+                This function start gameplay<br/><br/>
+            </li>
+            
+            <li>
+                <strong>stopGame()</strong><br/>
+                This function stop gameplay<br/><br/>
+            </li>
+
+            <li>
+                <strong>saveGame()</strong><br>
+                This function save game score<br><br>
+            </li>
+        </ul>
+		<hr>
+        
+        <h3 id="gameAssets"><strong>G) Game Assets</strong> - <a href="#toc">top</a></h3>
+        <p>The game contain 'design' folder which include following:
+        <ol>
+        	<li>rearrangeletters2_1200x650.psd - with layer folders below
+                <ul>
+                <li>Option</li>
+                <li>Result</li>
+                <li>Game</li>
+                <li>Category</li>
+                <li>Landing</li>
+                <li>Background</li>
+                </ul>
+        	</li>
+        </ol>
+        </p>
+        
+        <p>The folder 'assets' in 'game' folder contains all the images of the game that can be replaced. Is better to have the same size of the old ones if you want to reskin the game graphic without coding.</p>
+        <hr>
+        
+        <h3 id="XMLFile"><strong>H) XML File</strong> - <a href="#toc">top</a></h3>
+        <p>You can easily build or edit Question, Description and Background Image in <Strong>questions.xml</Strong> file
+        
+        <p>All Question, Description and Background Image are store in each XML item, sample code below:.</p>
+        <pre class="prettyprint linenums">
+    &#x3C;item&#x3E;
+        &#x3C;category&#x3E;2 PICS 1 WORD&#x3C;/category&#x3E;
+        &#x3C;landscape&#x3E;
+        	&#x3C;question type=&#x22;0&#x22; x=&#x22;50&#x22; y=&#x22;35&#x22; audio=&#x22;assets/sounds/questions/horseshoe.ogg&#x22;&#x3E;HORSESHOE&#x3C;/question&#x3E;
+        	&#x3C;description/&#x3E;
+        	&#x3C;background width=&#x22;35&#x22; left=&#x22;32.5&#x22; top=&#x22;48&#x22;&#x3E;assets/questions/horseshoe.svg&#x3C;/background&#x3E;
+        &#x3C;/landscape&#x3E;
+        &#x3C;portrait&#x3E;
+        	&#x3C;question type=&#x22;0&#x22; fontSize=&#x22;50&#x22; spaceX=&#x22;5&#x22; spaceY=&#x22;10&#x22; audio=&#x22;assets/sounds/questions/horseshoe.ogg&#x22;&#x3E;HORSESHOE&#x3C;/question&#x3E;
+       		&#x3C;description/&#x3E;
+        	&#x3C;background width=&#x22;80&#x22; top=&#x22;50&#x22; left=&#x22;10&#x22;&#x3E;assets/questions/horseshoe.svg&#x3C;/background&#x3E;
+        &#x3C;/portrait&#x3E;
+    &#x3C;/item&#x3E;
+        </pre>
+        <p>Below is the explanation of each most important XML elements:</p>
+        <ol>
+            <li><strong>category</strong> - is to categories the type of question (eg. RIDDLE, WORD GAME), the category name will be display in category page, leave it empty if categoryPage option is set to false.
+            <pre class="prettyprint linenums">
+        &lt;category&gt;RIDDLE&lt;/category&gt;
+            </pre>
+            </li>
+            
+            <li><strong>landscape, portrait</strong> - all questions value are seperate by two view mode which is landscape and portrait, each mode have their own values and settings
+            <pre class="prettyprint linenums">
+        &lt;landscape&gt;&lt;/landscape&gt;
+        &lt;portrait&gt;&lt;/portrait&gt;
+            </pre>
+            </li>
+            
+            <li><strong>question</strong> - the question and description must enter in between &lt;![CDATA[ ]]&gt; in xml so the data contained therein will not be parsed as XMLs
+                <ul>
+                	<li><strong>type</strong> - attribute type is type of question, 0 for single word game; 1 for multiple word (same length) game; 2 for multiple word (different length) game; 3 for sentence game</li>
+                    <li><strong>audio</strong> - attribute audio is the audio file path for word, it must have MP3 and OGG file format for cross-browser compatible, only OGG format to be insert to XML data, it will auto change to MP3 if is not support. For multiple word audio you can seperate by comma</li>
+                	<li><strong>lineHeight</strong> - attribute lineHeight can set the text line height (number only), this is optional when the question is too long to adjust the font size smaller, leave it empty to load default font size</li>
+                    <li><strong>fontSize</strong> - attribute fontSize can set the text font size (number only), this is optional when the question is too long to adjust the font size smaller, leave it empty to load default font size</li>
+                    <li><strong>color</strong> - attribute color can change the text color (hex only)</li>
+                    <li><strong>x</strong> - attribute x can change the word x center position (number only) in %</li>
+                    <li><strong>y</strong> - attribute y can change the word y center position (number only) in %</li>
+                    <li><strong>spaceX</strong> - attribute spaceX can change the letter x space (number only) in %</li>
+                    <li><strong>spaceY</strong> - attribute spaceY can change the letter y space (number only) in %</li>
+                    <li><strong>width</strong> - attribute width can change the word width (number only) in %</li>
+                    
+                    <li><strong>bottomLineHeight</strong> - attribute bottomLineHeight can set the text line height (number only), this is optional when the question is too long to adjust the font size smaller, leave it empty to load default font size</li>
+                    <li><strong>bottomFontSize</strong> - attribute ontSize can set the text font size (number only), this is optional when the question is too long to adjust the font size smaller, leave it empty to load default font size</li>
+                    <li><strong>bottomColor</strong> - attribute bottomColor can change the text color (hex only)</li>
+                    <li><strong>bottomX</strong> - attribute bottomX can change the word x center position (number only) in %</li>
+                    <li><strong>bottomY</strong> - attribute bottomY can change the word y center position (number only) in %</li>
+                    <li><strong>bottomSpaceX</strong> - attribute bottomSpaceX can change the letter x space (number only) in %</li>
+                    <li><strong>bottomSpaceY</strong> - attribute bottomSpaceY can change the letter y space (number only) in %</li>
+                    <li><strong>bottomWidth</strong> - attribute bottomWidth can change the word width (number only) in %</li>
+                </ul>
+                *For bottom option is use for Multiple Word (different length), which is the unsed letters<br/><br/>
+            </li>
+             
+             <li><strong>description</strong> - the description can be insert here in between &lt;![CDATA[ ]]&gt; in xml so the data contained therein will not be parsed as XMLs
+                <ul>
+                	
+                     <li><strong>type</strong> - attribute type can set to 'image' to load image as description instead of text, and the image path can insert into element like below</li>
+                <pre class="prettyprint linenums">
+            &lt;description type=&#39;image&#39;&gt;assets/item_unuse.svg&lt;/description&gt;
+                </pre>
+                    <li><strong>fontSize</strong> - attribute fontSize can set the desc font size (number only), this is optional when the question is too long to adjust the font size smaller, leave it empty to load default font size</li>
+                    <li><strong>lineHeight</strong> - attribute lineHeight can set the desc line height (number only), this is optional when the question is too long to adjust the font size smaller, leave it empty to load default font size</li>
+                    <li><strong>color</strong> - attribute color can change the desc color (hex only)</li>
+                    <li><strong>align</strong> - attribute align can set the desc align (left, center, right)</li>
+                    <li><strong>top</strong> - attribute top can change the desc top position (number only) in %</li>
+                    <li><strong>left</strong> - attribute left can change the desc left position (number only) in %</li>
+                    <li><strong>width</strong> - attribute width can change the desc width (number only) in %</li>
+                    <li><strong>height</strong> - attribute height can change the desc height (number only) in %</li>
+                    <li><strong>audio</strong> - attribute audio is the audio file path for desc, it must have MP3 and OGG file format for cross-browser compatible, only OGG format to be insert to XML data, it will auto change to MP3 if is not support.</li>
+                </ul><br/><br/>
+             </li>
+             
+             <li><strong>background</strong> - the background image path can be insert here
+                <ul>
+                	
+                     <li><strong>top</strong> - attribute top can change the background top position (number only) in %</li>
+                    <li><strong>left</strong> - attribute left can change the background left position (number only) in %</li>
+                    <li><strong>width</strong> - attribute width can change the background width (number only) in %</li>
+                    <li><strong>height</strong> - attribute height can change the background height (number only) in %</li>
+                </ul><br/><br/>
+             </li>
+             
+             <li><strong>videos</strong> - the videos can be insert here
+                <ul>
+                    <li><strong>embed</strong> - html video tag or youtube embed (html, youtube)</li>
+                    <li><strong>top</strong> - attribute top can change the video top position (number only) in %</li>
+                    <li><strong>left</strong> - attribute left can change the video left position (number only) in %</li>
+                    <li><strong>width</strong> - attribute width can change the video width (number only) in %</li>
+                    <li><strong>height</strong> - attribute height can change the video height (number only) in %</li>
+                    <li><strong>autoplay</strong> - attribute autoplay is to autoplay the video.</li>
+                    <li><strong>controls</strong> - attribute controls is to show/hide the video player controls.</li>
+                    <li><strong>video</strong> - the video path can be insert here, most browser can support mp4 video format.
+                    	<ul>
+                            <li><strong>type</strong> - video format type (video/mp4, video/webm, video/ogg)</li>
+                            <li><strong>src</strong> - video source file</li>
+                            <p>* For youtube embed must enter in between <![CDATA[ ]]> in xml so the data contained therein will not be parsed as XMLs </p>
+                        </ul>
+                    </li>
+                </ul><br/><br/>
+             </li>
+        </ol>
+        
+        <p>#IMPORTANS:<br/>
+        - Each word or sentenece must have at least 2 letters/sentence to work<br/>
+        - Make sure to select the right type for each question, e.g. Single Word or Sentence<br/>
+        </p>
+        
+        <p>You can add category thumbnail with format below.</p>
+        <pre class="prettyprint linenums">
+&lt;category&gt;
+	&lt;thumb name="RIDDLE"&gt;assets/item_thumb_riddle.svg&lt;/thumb&gt;
+	&lt;thumb name="GUESS MOVIE NAME"&gt;assets/item_thumb_movie.svg&lt;/thumb&gt;
+	&lt;thumb name="SUBCATEGORY"&gt;assets/item_thumb.png&lt;/thumb&gt;
+	&lt;thumb name="SUBCATEGORY 2" parent="SUBCATEGORY"&gt;assets/item_thumb.png&lt;/thumb&gt;
+	&lt;thumb name="All"&gt;assets/item_thumb.svg&lt;/thumb&gt;
+&lt;/category&gt;
+        </pre>
+        <ol>
+        	<li><strong>name</strong> - the category name to match for question's category to grap thumbnail, must be unique name and case sensitive</li>
+        	<li><strong>parent</strong> - parent category name</li>
+            <li>Follow by the image path</li>
+        </ol>
+        
+		<hr>
+        
+        <h3 id="buildinEditorTool"><strong>I) Build-in Edit Tools</strong> - <a href="#toc">top</a></h3>
+		
+		<p>This is the section where you can preview or edit the question with the tool by running edit.html.</p>
+        
+        <h5>1) Basic Options</h5>
+        <img src="assets/images/01.jpg">
+        <ol>
+        	<li>Select the viewport mode you want to edit.</li>
+            <li>Select the questions you want to edit.</li>
+            <li>Additionally you can remove, sort or add new questions.</li>
+            <li>Edit your question (Category, Question, Description and Background Image).</li>
+            <li>Generate the new XML, copy and replace into questions.xml file</li>
+        </ol>
+        
+        <br/>
+        <h5>2) Sort question list</h5>
+        <img src="assets/images/02.jpg">
+        
+        <br/>
+        <h5>3) Add new questions</h5>
+        <img src="assets/images/03.jpg">
+        <p>You may check out <a href="#questionTemplates">Question Templates</a> section.</p>
+        
+        <br/>
+        <h5>4) Edit category</h5>
+        <img src="assets/images/04.jpg">
+        <ol>
+            <li>Select caegory you want to edit.</li>
+            <li>Additionally you can remove, add new category.</li>
+            <li>Update the cateogry name and thumbnail, click Update to save.</li>
+        </ol>
+        
+        <br/>
+        <h5>5) Edit questions</h5>
+        <img src="assets/images/05.jpg">
+        <ol>
+        	<li>Edit category.</li>
+            <li>Select type and insert word/sentence.</li>
+            <li>Insert word/sentence property to adjust.</li>
+            <li>Insert multiple word property to adjust (For multiple word different length option which is unused letters).</li>
+            <li>Preview questions to save.</li>
+        </ol>
+        
+        <br/>
+        <h5>6) Edit description</h5>
+        <img src="assets/images/06.jpg">
+        <ol>
+            <li>Select description type and insert description text or image path.</li>
+            <li>Insert description property to adjust, for audio file path it must have MP3 and OGG file format for cross-browser compatible, only OGG format to be insert to XML data, it will auto change to MP3 if is not support</li>
+            <li>Preview description to save.</li>
+        </ol>
+        
+        <br/>
+        <h5>7) Edit background</h5>
+        <img src="assets/images/07.jpg">
+        <ol>
+            <li>Insert background image path and property to adjust.</li>
+            <li>Preview description to save.</li>
+        </ol>
+        
+        <br/>
+        <h5>8) Edit video</h5>
+        <img src="assets/images/08.jpg">
+        <ol>
+            <li>Insert video type for cross-platform support.</li>
+            <li>Edit video layout proprety to adjust.</li>
+            <li>Preview video to save.</li>
+        </ol>
+        
+		<hr>
+        
+        <h3 id="questionTemplates"><strong>J) Question Templates</strong> - <a href="#toc">top</a></h3>
+        <p>
+        There are total 5 type of templates:
+        
+            <p>1. <strong>Single Word:</strong> Solve single word by rearrange the letters, clue as description
+                <img src="assets/images/type1.jpg"><br>
+            </p>
+            
+            <p>2. <strong>Single Word with Picture:</strong> Solve single word by rearrange the letters, clue as image
+                <img src="assets/images/type2.jpg"><br>
+            </p>
+            
+            <p>3. <strong>Multiple Word (Same Length):</strong> Solve multiple word by rearrange the letters, e.g. Mega, Game, Mage
+                <img src="assets/images/type3.jpg"><br>
+            </p>
+            
+            <p>4. <strong>Multiple Word (Different Length):</strong> Solve multiple word by rearrange the letters, e.g. Finish, Fins, If
+                <img src="assets/images/type4.jpg"><br>
+            </p>
+            
+            <p>5. <strong>Sentence:</strong> Solve sentence by rearrange the word
+                <img src="assets/images/type5.jpg"><br>
+            </p>
+        </p>
+        <hr>
+        
+        <h3 id="saveXML"><strong>K) Save XML with password</strong> - <a href="#toc">top</a></h3>
+        <p>
+        Build-In Editor Tool come with the 'Save XML' button, follow steps below to use the feature:
+        
+        <ol>
+        	<li>First open <strong>save.php</strong> and change to the new password, default password is 12345.<br/>
+            	It is important to change the new password else anyone can open edit and save your XML file.
+            <pre class="prettyprint linenums">
+            $savePassord = '12345';
+            </pre>
+            </li>
+            <li>In the same <strong>save.php</strong> file, enable the save feature by changing <strong>$saveEnable</strong> to true.
+            <pre class="prettyprint linenums">
+            $saveEnable = true;
+            </pre>
+            </li>
+            <li>Set the <strong>questions.xml</strong> file permissions to 775 using your FTP software.</li>
+            <li>Start the Build-In Editor Tool, clicking the 'Save XML' button will prompt to enter password to save.</li>
+        </ol>
+        
+        </p>
+        
+        <hr>
+        
+        <h3 id="scoreboard"><strong>L) Scoreboard</strong> - <a href="#toc">top</a></h3>
+        <p>Scoreboard is a option where user can submit score and view top 10 leaderboard, follow the steps below to setup and run scoreboard.</p>
+        <p>
+        <h3>1) Server setup</h3>
+        <h4>Create new database in cPanel</h4>
+        <ol>
+            <li>In cPanel, select MySQL Database Wizard from the Databases section.</li>
+            <li>Enter a name for the new database you wish to create and continue to the next step.</li>
+            <li>Enter a username and password to create the database user account and continue to the next step.</li>
+            <li>Select All Privileges to set security permissions the user has to the database and continue to the next step.</li>
+        </ol>
+        
+        <h4>Add new table in cPanel</h4>
+        <ol>
+            <li>In cPanel, select PhpMyAdmin tool from the Databases section.</li>
+            <li>Click and open the newly create database and run sql query below to create new table</li>
+            <pre class="prettyprint linenums">CREATE TABLE rearrangeletters2_scores (
+id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+name VARCHAR(30) NOT NULL DEFAULT 'anonymous',
+email VARCHAR(30) NOT NULL,
+type VARCHAR(30) NOT NULL,
+score INT(100) UNSIGNED NOT NULL DEFAULT 0,
+date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) CHARSET=utf8 DEFAULT COLLATE utf8_unicode_ci;
+            </pre>
+        </ol>
+        
+        <h4>Configuration for database access</h4>
+        <ol>
+            <li>Open dbconn.php in game folder and change the settings to your newly created database info</li>
+            <pre class="prettyprint linenums">    $host = "localhost"; // MySQL hostname
+    $dbUserName = "root"; // MySQL database username
+    $dbPwd = ""; // MySQL database password
+    $dbName = "scoreboard"; // The name of the database
+    $table = "rearrangeletters2_scores"; //the name of the table
+            </pre>
+        </ol>
+        
+        <h3>2) Settings</h3>
+        <p>Enable the scoreboard by changing 'displayScoreBoard' to true in score.js, you can easily customize other settings in here
+        <pre class="prettyprint linenums">
+var scoreboardSettings = {
+    displayScoreBoard:false, //toggle submit and scoreboard button
+    scoreBoardTitle:"TOP 10 Scoreboard", //text for scoreboard title
+    scoreRank_arr:["1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th"], //scoreboard ranking list
+    totalScorePage:1, //total score pages, .e.g. 2 for 20 listing
+    submitTitle:"Submit your score", //text for submit title
+    score_arr:[{col:"RANK", percent:8, align:"center"},
+                {col:"NAME", percent:42, align:"left"},
+                {col:"CATEGORY", percent:20, align:"center"},
+                {col:"SCORE", percent:30, align:"center"}]
+}
+        </pre>
+        </p>
+        <hr>
+        
+        <h3 id="compatibility"><strong>M) Compatibility</strong> - <a href="#top">top</a></h3>
+		
+		<p>This game is build for Desktop browsers that support HTML5 canvas. Any mobile/tablet should work in landscape view, but they are not officially supported.</p>
+		<hr>
+		
+		<h3 id="credits"><strong>N) Sources and Credits</strong> - <a href="#toc">top</a></h3>
+		
+		<p>I've used the following font and sound files as listed.</p>
+		
+		<ul>
+			<li><a href="https://freesound.org/people/bwg2020/sounds/456161/" target="_blank">Correct.wav</a> from file bwg2020</li>
+            <li><a href="https://freesound.org/people/LittleRainySeasons/sounds/335908/" target="_blank">Correct.mp3</a> from file LittleRainySeasons</li>
+            <li><a href="https://freesound.org/people/Ultranova105/sounds/136755/" target="_blank">Positive Warning.wav</a> from file Ultranova105</li>
+            <li><a href="https://freesound.org/people/rhodesmas/sounds/320652/" target="_blank">Success 02</a> from file rhodesmas</li>
+            <li><a href="https://freesound.org/people/Fachii/sounds/338229/" target="_blank">Button hover.wav</a> from file Fachii</li> 
+            <li><a href="https://freesound.org/people/DrMinky/sounds/166186/" target="_blank">Menu screen mouse over</a> from file DrMinky</li> 
+            <li><a href="https://freesound.org/people/Soundscapes55/sounds/435997/" target="_blank">Menu Select Sound.wav</a> from file Soundscapes55</li> 
+            <li><a href="https://freesound.org/people/FoolBoyMedia/sounds/352661/" target="_blank">Complete Chime</a> from file FoolBoyMedia</li> 
+            <li><a href="https://freesound.org/people/GameAudio/sounds/220168/" target="_blank">Button Spacey Confirm</a> from file GameAudio</li> 
+            
+                    
+            <li><a href="https://translate.google.com/" target="_blank">Answer and Description audio</a> are record from Google Translate</li>
+		</ul>
+		
+		<hr>
+        
+        <h3 id="changelog"><strong>O) Changelog</strong> - <a href="#toc">top</a></h3>
+
+        Version 2.7
+		<ul>
+			<li>Fixed multiple words issue</li>
+		</ul>
+
+        Version 2.6
+		<ul>
+			<li>Added scoreboard format</li>
+			<li>Added scoreboard loader</li>
+		</ul>
+
+        Version 2.5
+		<ul>
+			<li>Oraganized scoreboard folder</li>
+			<li>Changed scoreboard settings</li>
+		</ul>
+
+        Version 2.4
+		<ul>
+			<li>Fixed viewport rotate issue</li>
+		</ul>
+
+        Version 2.3
+		<ul>
+			<li>Fixed category thumbnail</li>
+			<li>Fixed game timer</li>
+			<li>View scoreboard from options</li>
+			<li>View scoreboard for all category</li>
+			<li>Compatible with Quiz Membership System add-on</li>
+		</ul>
+
+		Version 2.2
+		<ul>
+			<li>Fixed Build-in Editor Tool drag and resize issue</li>
+		</ul>
+
+		Version 2.1
+		<ul>
+			<li>Option to add subcategory</li>
+		</ul>
+
+		Version 2.0
+		<ul>
+        	<li>Fixed game title shadow issue</li>
+		</ul>
+		
+		Version 1.9
+		<ul>
+        	<li>Build-in Editor Tool UI improvements (Able to drag and resize)</li>
+		</ul>
+
+		Version 1.8
+		<ul>
+        	<li>Fixed category after removed</li>
+		</ul>
+
+		Version 1.7
+		<ul>
+        	<li>Option to set device viewport mode</li>
+		</ul>
+        
+        Version 1.6
+		<ul>
+        	<li>Fixed video issue</li>
+            <li>Added youtube video</li>
+		</ul>
+        
+        Version 1.5
+		<ul>
+        	<li>Fixed Build-in Editor issues</li>
+		</ul>
+        
+        Version 1.4
+		<ul>
+        	<li>Added shadow option for each questions</li>
+            <li>Build-in Editor Tool UI improvements</li>
+		</ul>
+        
+        Version 1.3
+		<ul>
+        	<li>Fixed category listing</li>
+		</ul>
+        
+        Version 1.2
+		<ul>
+        	<li>Added video option as description</li>
+		</ul>
+        
+        Version 1.1
+		<ul>
+        	<li>Fixed image loader issue</li>
+            <li>Added option for scoreboard to show more than 10 listing</li>
+		</ul>
+		<hr>
+		
+		<h3 id="support"><strong>P) Support Policy</strong> - <a href="#toc">top</a></h3>
+
+		<p>Check out support policy <a href="http://demonisblack.com/code/support-policy/">here</a>.</p>
+		<hr>
+		
+		<p>Once again, thank you so much for purchasing this game, if you have a more general question relating to the games on CodeCanyon, you might consider visiting the item page in the <a href="https://codecanyon.net/item/rearrange-letters-2-html5-game/23681564/support">"Support"</a> section.</p>
+		<p>If you like the game, please take a moment to rate it. Thanks!   <img src="assets/images/rate.png" /><img src="assets/images/rate.png" /><img src="assets/images/rate.png" /><img src="assets/images/rate.png" /><img src="assets/images/rate.png" /></p>
+        
+        <p>
+        	<h3>How to rate an item on CodeCanyon?</h3>
+            If you want to rate one of our items on CodeCanyon please do it like this:
+            <ol>
+                <li>Login to CodeCanyon</li>
+                <li>Open the menu on the top right, and click onto the link “Downloads” which shows a list of your downloads</li>
+                <li>Rate our items using the stars</li>
+                <li>That’s it. Thank you very much!</li>
+            </ol>
+        </p>
+		
+		<p class="append-bottom alt large"><strong>demonisblack</strong></p>
+		<p><a href="#toc">Go To Table of Contents</a></p>
+		
+		<hr class="space">
+	</div><!-- end div .container -->
+</body>
+</html>

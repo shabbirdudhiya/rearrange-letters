@@ -1,0 +1,351 @@
+<div id="editWrapper">
+    <div id="floatForm">
+    	<input id='toggleShowOption' name="toggleOption" type="button" value="Hide Edit Option" />
+        
+        <div id="editOption">
+        	<br/>
+            Select viewport mode:<br/>
+            <select id="modelist" name="modelist">
+                <option>landscape</option>
+                <option>portrait</option>
+            </select><br/><br/>
+            
+            <div id='selectQuestionWrapper'>
+                Select questions:<br/>
+                <select id="questionslist" name="questionslist">
+                </select><br/>
+                <input id="prevQuestion" name="prevQuestion" class="button" type="button" value="Prev Question">
+                <input id="nextQuestion" name="nextQuestion" class="button" type="button" value="Next Question">
+                <br/><br/>
+            </div>
+            <div id='topWrapper'>
+                <input id="removeQuestion" name="removeQuestion" type="button" value="Remove Question">
+                <input id="sortQuestion" name="sortQuestion" type="button" value="Sort Question">
+                <input id="newQuestion" name="newQuestion" type="button" value="New Question">
+                <br/><br/>
+            </div>
+            
+            <div id="actionWrapper">
+                <div id="actionCategory">
+                    Edit category:<br/>
+                    <input id='editCategory' name="editCategory" type="button" value="Edit Category" />
+                    <br/><br/>
+                </div>
+                Edit question:<br/>
+                <input id='editQuestion' name="editQuestion" type="button" value="Edit Question" />
+                <input id='editDescription' name="editDescription" type="button" value="Edit Description" />
+                <input id='editBackground' name="editBackground" type="button" value="Edit Background" />
+                <input id='editVideo' name="editVideo" type="button" value="Edit Video" />
+                <div id="actionSave">
+                    <br/><br/>
+                    Generate and replace XML file:<br/>
+                    <input id='generateXML' name="generateXML" type="button" value="Generate XML" />
+                    <textarea id="outputXML" name="outputXML" cols="" rows="10"></textarea>
+                    <input id='saveXML' name="saveXML" type="button" value="Save XML" />
+                </div>
+            </div>
+            
+            <div id='sortWrapper' style="display:none;">
+                Question list:
+               <select id="sortquestionslist" name="sortquestionslist" size="10">
+                </select>
+                <br/><br/>
+                <input id='moveQuestionUp' name="moveQuestionUp" class="button" type="button" value="Move Up" />
+                <input id='moveQuestionDown' name="moveQuestionDown" class="button" type="button" value="Move Down" />
+                <input id='doneSort' name="doneSort" type="button" value="Done" />
+            </div>
+            
+            <div id='templateWrapper' style="display:none;">
+                Select template to add:
+               <select id="templatelist" name="templatelist" size="10">
+                </select>
+                <br/><br/>
+                <input id='addNewTemplate' name="addNewTemplate" type="button" value="Add Question" />
+                <input id='doneTemplate' name="doneTemplate" type="button" value="Done" />
+            </div>
+            
+            <div id='categoryWrapper' style="display:none;">
+            	Edit category:<br/>
+                Select category to edit:
+               <select id="categorylist" name="categorylist" size="10">
+                </select>
+				*Category name must be unique and case sensitive
+                <br/><br/>
+                <input id='addNewCategory' name="addNewCategory" type="button" value="Add Category" />
+				<input id='addNewSubCategory' name="addNewSubCategory" type="button" value="Add Subcategory" /><br/>
+				*Select category to add sub category<br/><br/>
+				
+                <input id='removeCategory' name="removeCategory" type="button" value="Remove Category" />
+                <br/><br/>
+                <div class="formRow">
+                    <label class="button">Name:</label>
+                    <input id="categoryName" name="categoryName" class="button" type="text" />
+                </div>
+                <div class="formRow">
+                    <label class="button">Thumbnail:</label>
+                    <input id="categoryThumbnail" name="categoryThumbnail" class="button" type="text" />
+                </div>
+                <input id='updateCategory' name="updateCategory" type="button" value="Update Category" />
+                <br/><br/>
+                <input id='doneCategory' name="doneCategory" type="button" value="Done" />
+            </div>
+            
+            <div id='questionWrapper' style="display:none;">
+                Edit question: 
+                <div id="questionCategory" class="formRow">
+                    <label class="button">Category:</label>
+                    <select id="category" class="half" name="category">
+                    </select>
+                </div>
+                
+                <div class="formRow">
+                    <label class="button">Type:</label>
+                    <select id="questiontype" class="half" name="questiontype">
+                        <option value="0">single word</option>
+                        <option value="1">multiple word (same length)</option>
+                        <option value="2">multiple word (different length)</option>
+                        <option value="3">sentence</option>
+                    </select>
+                </div>
+                
+                <div class="formRow extraHeight" >
+                    Word or sentence:
+                    <textarea id="questionText" name="questionText" cols="" rows=""></textarea>
+                </div>
+                
+                <div class="formRow extraHeight" >
+                    Audio (Use comma for multiple word audios):<br/>
+                    <textarea id="questionAudio" name="questionAudio" cols="" rows=""></textarea>
+                </div>
+                *Audio must have MP3 and OGG file format for cross-browser compatible, insert only OGG format for audio field.
+                <br/><br/>
+                
+                <div class="formRow" >
+                    <label class="button">Font Size:</label>
+                    <input id="questionFontSize" name="questionFontSize" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Line Height:</label>
+                    <input id="questionLineHeight" name="questionLineHeight" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Color:</label>
+                    <input id="questionColor" name="questionColor" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Center X,Y (1-100)%:</label>
+                    <input id="questionPosition" name="questionPosition" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Space X,Y:</label>
+                    <input id="questionSpace" name="questionSpace" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Width:</label>
+                    <input id="questionWidth" name="questionWidth" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Shadow:</label>
+                    <input id="questionShadow" name="questionShadow" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Shadow hover:</label>
+                    <input id="questionShadowHover" name="questionShadowHover" class="button" type="text" />
+                </div>
+                <div id="multipleWrapper" class="multiple words">
+                    <br/>
+                    Multiple word options:
+                    <div class="formRow" >
+                        <label class="button">Font Size:</label>
+                        <input id="questionBottomFontSize" name="questionBottomFontSize" class="button" type="text" />
+                    </div>
+                    <div class="formRow" >
+                        <label class="button">Line Height:</label>
+                        <input id="questionBottomLineHeight" name="questionBottomLineHeight" class="button" type="text" />
+                    </div>
+                    <div class="formRow" >
+                        <label class="button">Color:</label>
+                        <input id="questionBottomColor" name="questionBottomColor" class="button" type="text" />
+                    </div>
+                    <div class="formRow" >
+                        <label class="button">Center X,Y (1-100)%:</label>
+                        <input id="questionBottomPosition" name="questionBottomPosition" class="button" type="text" />
+                    </div>
+                    <div class="formRow" >
+                        <label class="button">Space X,Y:</label>
+                        <input id="questionBottomSpace" name="questionBottomSpace" class="button" type="text" />
+                    </div>
+                    <div class="formRow" >
+                        <label class="button">Bottom width (1-100)%:</label>
+                        <input id="questionBottomWidth" name="questionBottomWidth" class="button" type="text" />
+                    </div>
+                </div>
+                <br/>
+                <input id='previewQuestion' name="previewQuestion" type="button" value="Preview Question" />
+                <input id='doneQuestion' name="doneQuestion" type="button" value="Done" />
+            </div>
+            
+            <div id='descriptionWrapper' style="display:none;">
+                Edit Description:
+                <div class="formRow">
+                    <label class="button">Type:</label>
+                    <select id="descriptiontype" class="half" name="descriptiontype">
+                        <option value="text">text</option>
+                        <option value="image">image</option>
+                    </select>
+                </div>
+                Text or image path:<br/>
+                *For multiple word use [COMPLETE] to display completed word.
+                <textarea id="descriptionText" name="descriptionText" cols="" rows=""></textarea>
+                <br/><br/><br/><br/>
+                <div class="formRow" >
+                    <label class="button">Font Size:</label>
+                    <input id="descriptionFontSize" name="descriptionFontSize" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Line Height:</label>
+                    <input id="descriptionLineHeight" name="descriptionLineHeight" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Color:</label>
+                    <input id="descriptionColor" name="descriptionColor" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Text Align:</label>
+                    <select id="descriptionAlign" class="half" name="descriptionAlign">
+                        <option value="left">left</option>
+                        <option value="center">center</option>
+                        <option value="right">right</option>
+                    </select>
+                </div>
+                <div class="formRow" >
+                    <label class="button">Top (1-100)%:</label>
+                    <input id="descriptionTop" name="descriptionTop" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Left (1-100)%:</label>
+                    <input id="descriptionLeft" name="descriptionLeft" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Width (1-100)%:</label>
+                    <input id="descriptionWidth" name="descriptionWidth" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Height (1-100)%:</label>
+                    <input id="descriptionHeight" name="descriptionHeight" class="button" type="text" />
+                </div>
+                <div class="formRowLong extraHeight" >
+                    <label class="button">Audio:</label>
+                    <input id="descriptionAudio" name="descriptionAudio" type="text" />
+                </div>
+                *Audio must have MP3 and OGG file format for cross-browser compatible, insert only OGG format for audio field.
+                <br/><br/>
+                <input id='previewDescription' name="previewDescription" type="button" value="Preview Description" />
+                <input id='doneDescription' name="doneDescription" type="button" value="Done" />
+            </div>
+            
+            <div id='backgroundWrapper' style="display:none;">
+                Edit Background:<br/>
+                Image path:<br/>
+                <textarea id="backgroundPath" name="backgroundPath" cols="" rows=""></textarea>
+                <br/><br/><br/><br/>
+                <div class="formRow" >
+                    <label class="button">Top (1-100)%:</label>
+                    <input id="backgroundTop" name="backgroundTop" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Left (1-100)%:</label>
+                    <input id="backgroundLeft" name="backgroundLeft" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Width (1-100)%:</label>
+                    <input id="backgroundWidth" name="backgroundWidth" class="button" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Height (1-100)%:</label>
+                    <input id="backgroundHeight" name="backgroundHeight" class="button" type="text" />
+                </div>
+                <br/>
+                <input id='previewBackground' name="previewBackground" type="button" value="Preview Background" />
+                <input id='doneBackground' name="doneBackground" type="button" value="Done" />
+            </div>
+            
+            <div id='videoWrapper' style="display:none;">
+                Edit video:<br/><br/>
+            	Video embed type:
+                <select id="videoEmbed" name="videoEmbed">
+                	<option value="html">html</option>
+                    <option value="youtube">youtube</option>
+                </select>
+                <input id="removeVideoContainer" name="removeVideoContainer" type="button" value="Remove Video">
+                <br/><br/>
+                <div id="videoTypeWrapper" class="innerWrapper">
+                    Video type list:
+                    <select id="videoslist" name="videoslist">
+                    </select>
+                    
+                    <input id="prevVideo" name="prevVideo" class="button" type="button" value="Prev Video Type">
+                    <input id="nextVideo" name="nextVideo" class="button" type="button" value="Next Video Type">
+                    
+                    <input id="removeVideo" name="removeVideo" type="button" value="Remove Video Type">
+                    <input id="addVideo" name="addVideo" type="button" value="Add Video Type">
+                    <br/><br/>
+                    <div class="formRow" >
+                        <label class="button">Type:</label>
+                        <select id="videotype" class="half" name="videotype">
+                            <option value="video/mp4">video/mp4</option>
+                            <option value="video/webm">video/webm</option>
+                            <option value="video/ogg">video/ogg</option>
+                        </select>
+                    </div>
+                    <div class="formRowLong extraHeight" >
+                        Video path:
+                        <input id="videoSrc" name="videoSrc" class="resetVideo" type="text" />
+                    </div>
+                </div>
+                
+                <div id="youtubeTypeWrapper" class="innerWrapper">
+                    <div class="formRowLong extraHeight" >
+                        Youtube embed:
+                        <input id="youtubeSrc" name="youtubeSrc" class="resetVideo" type="text" />
+                    </div>
+                </div>
+                
+                <br/>
+                <div id="videoAutoplayField" class="formRow" >
+                    <label class="button">Autoplay:</label>
+                    <select id="videoAutoplay" class="half" name="videoAutoplay">
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+                </div>
+                <div id="videoControlsField" class="formRow" >
+                    <label class="button">Controls:</label>
+                    <select id="videoControls" class="half" name="videoControls">
+                        <option value="true">true</option>
+                        <option value="false">false</option>
+                    </select>
+                </div>
+                <div class="formRow" >
+                    <label class="button">Width (0-100)%:</label>
+                    <input id="videoWidth" name="videoWidth" class="button resetVideo" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Height (0-100)%:</label>
+                    <input id="videoHeight" name="videoHeight" class="button resetVideo" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Top (0-100)%:</label>
+                    <input id="videoTop" name="videoTop" class="button resetVideo" type="text" />
+                </div>
+                <div class="formRow" >
+                    <label class="button">Left (0-100)%:</label>
+                    <input id="videoLeft" name="videoLeft" class="button resetVideo" type="text" />
+                </div>
+                <br/><br/>
+                <input id='previewVideo' name="previewVideo" type="button" value="Preview Video" />
+                <input id='doneVideo' name="doneVideo" type="button" value="Done" />
+            </div>
+        </div>
+    </div>
+</div>

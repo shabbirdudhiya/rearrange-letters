@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questions>
+	<category>
+		<thumb name="SUBCATEGORY">assets/item_thumb_picture.svg</thumb>
+		<thumb name="SUBCATEGORY 1" parent="SUBCATEGORY">assets/item_thumb_picture.svg</thumb>
+		<thumb name="SUBCATEGORY 2" parent="SUBCATEGORY 1">assets/item_thumb_picture.svg</thumb>
+		<thumb name="GUESS MOVIE NAME">assets/item_thumb_movie.svg</thumb>
+		<thumb name="FAMOUSE QUOTE">assets/item_thumb_quote.svg</thumb>
+		<thumb name="WORD GAME">assets/item_thumb_word.svg</thumb>
+		<thumb name="2 PICS 1 WORD">assets/item_thumb_picture.svg</thumb>
+		<thumb name="RIDDLE">assets/item_thumb_riddle.svg</thumb>
+		<thumb name="VIDEO">assets/item_thumb_video.svg</thumb>
+		<thumb name="ALL">assets/item_thumb.svg</thumb>
+	</category>
+	
+	<item>
+		<category>SUBCATEGORY 2</category>
+		<landscape>
+			<question type="0" x="50" y="35" audio="assets/sounds/questions/horseshoe.ogg"><![CDATA[HORSESHOE]]></question>
+			<description/>
+			<background width="35" left="32.5" top="48">assets/questions/horseshoe.svg</background>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="50" spaceX="5" spaceY="10" audio="assets/sounds/questions/horseshoe.ogg"><![CDATA[HORSESHOE]]></question>
+			<description/>
+			<background width="80" top="50" left="10">assets/questions/horseshoe.svg</background>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>2 PICS 1 WORD</category>
+		<landscape>
+			<question type="0" x="50" y="35" audio="assets/sounds/questions/horseshoe.ogg"><![CDATA[HORSESHOE]]></question>
+			<description/>
+			<background width="35" left="32.5" top="48">assets/questions/horseshoe.svg</background>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="50" spaceX="5" spaceY="10" audio="assets/sounds/questions/horseshoe.ogg"><![CDATA[HORSESHOE]]></question>
+			<description/>
+			<background width="80" top="50" left="10">assets/questions/horseshoe.svg</background>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>2 PICS 1 WORD</category>
+		<landscape>
+			<question type="0" x="50" y="35" audio="assets/sounds/questions/rainbow.ogg"><![CDATA[RAINBOW]]></question>
+			<description type="text" align="center"><![CDATA[]]></description>
+			<background width="35" left="32.5" top="48">assets/questions/rainbow.svg</background>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="50" spaceX="5" spaceY="10" audio="assets/sounds/questions/rainbow.ogg">RAINBOW</question>
+			<description/>
+			<background width="80" top="50" left="10">assets/questions/rainbow.svg</background>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>2 PICS 1 WORD</category>
+		<landscape>
+			<question type="0" x="50" y="35" audio="assets/sounds/questions/bookworm.ogg"><![CDATA[BOOKWORM]]></question>
+			<description/>
+			<background width="35" left="32.5" top="48">assets/questions/bookworm.svg</background>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="50" spaceX="5" spaceY="10" audio="assets/sounds/questions/bookworm.ogg">BOOKWORM</question>
+			<description/>
+			<background width="80" top="50" left="10">assets/questions/bookworm.svg</background>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>2 PICS 1 WORD</category>
+		<landscape>
+			<question type="0" x="50" y="35" audio="assets/sounds/questions/earring.ogg"><![CDATA[EARRING]]></question>
+			<description/>
+			<background width="35" left="32.5" top="48">assets/questions/earring.svg</background>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="50" spaceX="5" spaceY="10" audio="assets/sounds/questions/earring.ogg">EARRING</question>
+			<description/>
+			<background width="80" top="50" left="10">assets/questions/earring.svg</background>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>2 PICS 1 WORD</category>
+		<landscape>
+			<question type="0" x="50" y="35" audio="assets/sounds/questions/sunburn.ogg"><![CDATA[SUNBURN]]></question>
+			<description/>
+			<background width="35" left="32.5" top="48">assets/questions/sunburn.svg</background>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="50" spaceX="5" spaceY="10" audio="assets/sounds/questions/sunburn.ogg">SUNBURN</question>
+			<description/>
+			<background width="80" top="50" left="10">assets/questions/sunburn.svg</background>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>FAMOUSE QUOTE</category>
+		<landscape>
+			<question type="3" audio="assets/sounds/questions/quote1.ogg" shadow="10" shadowHover="15"><![CDATA[Let us sacrifice our today so that our children can have a better tomorrow.]]></question>
+			<description><![CDATA[A. P. J. Abdul Kalam]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="3" fontSize="40" lineHeight="40" width="85" spaceX="15" spaceY="8" shadow="7" shadowHover="10" audio="assets/sounds/questions/quote1.ogg"><![CDATA[Let us sacrifice our today so that our children can have a better tomorrow.]]></question>
+			<description><![CDATA[A. P. J. Abdul Kalam]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>FAMOUSE QUOTE</category>
+		<landscape>
+			<question type="3" audio="assets/sounds/questions/quote2.ogg" shadow="10" shadowHover="15"><![CDATA[There is nothing permanent except change.]]></question>
+			<description><![CDATA[Heraclitus]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="3" fontSize="40" lineHeight="40" width="85" spaceX="15" spaceY="8" shadow="7" shadowHover="10" audio="assets/sounds/questions/quote2.ogg"><![CDATA[There is nothing permanent except change.]]></question>
+			<description><![CDATA[Heraclitus]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>FAMOUSE QUOTE</category>
+		<landscape>
+			<question type="3" audio="assets/sounds/questions/quote3.ogg" shadow="10" shadowHover="15"><![CDATA[You cannot shake hands with a clenched fist.]]></question>
+			<description><![CDATA[Indira Gandhi]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="3" fontSize="40" lineHeight="40" width="85" spaceX="15" spaceY="8" shadow="7" shadowHover="10" audio="assets/sounds/questions/quote3.ogg"><![CDATA[You cannot shake hands with a clenched fist.]]></question>
+			<description><![CDATA[Indira Gandhi]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>FAMOUSE QUOTE</category>
+		<landscape>
+			<question type="3" audio="assets/sounds/questions/quote4.ogg" shadow="10" shadowHover="15"><![CDATA[Life is 10% what happens to you and 90% how you react to it.]]></question>
+			<description><![CDATA[Charles R. Swindoll]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="3" fontSize="40" lineHeight="40" width="85" spaceX="15" spaceY="8" shadow="7" shadowHover="10" audio="assets/sounds/questions/quote4.ogg"><![CDATA[Life is 10% what happens to you and 90% how you react to it.]]></question>
+			<description><![CDATA[Charles R. Swindoll]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>FAMOUSE QUOTE</category>
+		<landscape>
+			<question type="3" audio="assets/sounds/questions/quote5.ogg" shadow="10" shadowHover="15"><![CDATA[Happiness can exist only in acceptance.]]></question>
+			<description><![CDATA[George Orwell]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="3" fontSize="40" lineHeight="40" width="85" spaceX="15" spaceY="8" shadow="7" shadowHover="10" audio="assets/sounds/questions/quote5.ogg"><![CDATA[Happiness can exist only in acceptance.]]></question>
+			<description><![CDATA[George Orwell]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>RIDDLE</category>
+		<landscape>
+			<question type="0" audio="assets/sounds/questions/riddle1_answer.ogg">CANDLE</question>
+			<description audio="assets/sounds/questions/riddle1.ogg">I'm tall when I'm young and I'm short when I'm old. What am I? </description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="60" lineHeight="60" spaceX="5" spaceY="10" audio="assets/sounds/questions/riddle1_answer.ogg"><![CDATA[CANDLE]]></question>
+			<description type="text" fontSize="20" lineHeight="23" align="center" audio="assets/sounds/questions/riddle1.ogg"><![CDATA[I'm tall when I'm young and I'm short when I'm old. What am I? ]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>RIDDLE</category>
+		<landscape>
+			<question type="0" audio="assets/sounds/questions/riddle2_answer.ogg">NEEDLE</question>
+			<description audio="assets/sounds/questions/riddle2.ogg">What has an eye but can not see? </description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="60" lineHeight="60" spaceX="5" spaceY="10" audio="assets/sounds/questions/riddle2_answer.ogg"><![CDATA[NEEDLE]]></question>
+			<description type="text" fontSize="20" lineHeight="23" align="center" audio="assets/sounds/questions/riddle2.ogg">What has an eye but can not see? </description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>RIDDLE</category>
+		<landscape>
+			<question type="0" audio="assets/sounds/questions/riddle3_answer.ogg">WATERMELON</question>
+			<description audio="assets/sounds/questions/riddle3.ogg">There was a green house. Inside the green house there was a white house. Inside the white house there was a red house. Inside the red house there were lots of babies. What is it? </description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="35" lineHeight="35" spaceX="5" spaceY="10" audio="assets/sounds/questions/riddle3_answer.ogg"><![CDATA[WATERMELON]]></question>
+			<description type="text" fontSize="20" lineHeight="23" align="center" top="60" audio="assets/sounds/questions/riddle3.ogg"><![CDATA[There was a green house. Inside the green house there was a white house. Inside the white house there was a red house. Inside the red house there were lots of babies. What is it? ]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>RIDDLE</category>
+		<landscape>
+			<question type="0" audio="assets/sounds/questions/riddle4_answer.ogg">PROMISE</question>
+			<description audio="assets/sounds/questions/riddle4.ogg">What gets broken without being held? </description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="60" lineHeight="60" spaceX="5" spaceY="10" audio="assets/sounds/questions/riddle4_answer.ogg"><![CDATA[PROMISE]]></question>
+			<description type="text" fontSize="20" lineHeight="23" align="center" audio="assets/sounds/questions/riddle4.ogg">What gets broken without being held? </description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>RIDDLE</category>
+		<landscape>
+			<question type="0" audio="assets/sounds/questions/riddle5_answer.ogg">MUSHROOM</question>
+			<description audio="assets/sounds/questions/riddle5.ogg">What kind of room has no doors or windows? </description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="40" lineHeight="40" spaceX="5" spaceY="10" audio="assets/sounds/questions/riddle5_answer.ogg"><![CDATA[MUSHROOM]]></question>
+			<description type="text" fontSize="20" lineHeight="23" align="center" audio="assets/sounds/questions/riddle5.ogg">What kind of room has no doors or windows? </description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>GUESS MOVIE NAME</category>
+		<landscape>
+			<question type="3" fontSize="85" lineHeight="85" width="60" spaceX="50" spaceY="20" audio="assets/sounds/questions/movie1_answer.ogg"><![CDATA[THE BREAKFAST CLUB]]></question>
+			<description audio="assets/sounds/questions/movie1.ogg"><![CDATA[A bunch of whiny teenagers spend a day in a library.]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="3" fontSize="50" lineHeight="50" spaceX="25" spaceY="10" width="60" audio="assets/sounds/questions/movie1_answer.ogg"><![CDATA[THE BREAKFAST CLUB]]></question>
+			<description fontSize="20" lineHeight="20" audio="assets/sounds/questions/movie1.ogg"><![CDATA[A bunch of whiny teenagers spend a day in a library.]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>GUESS MOVIE NAME</category>
+		<landscape>
+			<question type="3" fontSize="85" lineHeight="85" width="60" spaceX="50" spaceY="20" audio="assets/sounds/questions/movie2_answer.ogg"><![CDATA[BACK TO THE FUTURE]]></question>
+			<description audio="assets/sounds/questions/movie2.ogg"><![CDATA[Kid goes back in time to stop an old man being his dad's boss.]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="3" fontSize="50" lineHeight="50" spaceX="25" spaceY="10" width="60" audio="assets/sounds/questions/movie2_answer.ogg"><![CDATA[BACK TO THE FUTURE]]></question>
+			<description fontSize="20" lineHeight="20" audio="assets/sounds/questions/movie2.ogg"><![CDATA[Kid goes back in time to stop an old man being his dad's boss.]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>GUESS MOVIE NAME</category>
+		<landscape>
+			<question type="3" fontSize="85" lineHeight="85" width="60" spaceX="50" spaceY="20" audio="assets/sounds/questions/movie3_answer.ogg"><![CDATA[THE LORD OF THE RINGS]]></question>
+			<description audio="assets/sounds/questions/movie3.ogg"><![CDATA[A couple of tiny little blokes take three long films to return a piece of unwanted jewellery.]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="3" fontSize="50" lineHeight="50" spaceX="25" spaceY="10" width="60" audio="assets/sounds/questions/movie3_answer.ogg"><![CDATA[THE LORD OF THE RINGS]]></question>
+			<description fontSize="20" lineHeight="20" audio="assets/sounds/questions/movie3.ogg"><![CDATA[A couple of tiny little blokes take three long films to return a piece of unwanted jewellery.]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>GUESS MOVIE NAME</category>
+		<landscape>
+			<question type="3" fontSize="85" lineHeight="85" width="60" spaceX="50" spaceY="20" audio="assets/sounds/questions/movie4_answer.ogg"><![CDATA[BEAUTY AND THE BEAST]]></question>
+			<description audio="assets/sounds/questions/movie4.ogg"><![CDATA[Innocent staff turned into teapot, clock & candlestick rely on Stockholm Syndrome to save themselves & loved ones.]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="3" fontSize="50" lineHeight="50" spaceX="25" spaceY="10" width="60" audio="assets/sounds/questions/movie4_answer.ogg"><![CDATA[BEAUTY AND THE BEAST]]></question>
+			<description fontSize="20" lineHeight="20" audio="assets/sounds/questions/movie4.ogg"><![CDATA[Innocent staff turned into teapot, clock & candlestick rely on Stockholm Syndrome to save themselves & loved ones.]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>GUESS MOVIE NAME</category>
+		<landscape>
+			<question type="0" fontSize="120" audio="assets/sounds/questions/movie5_answer.ogg"><![CDATA[INCEPTION]]></question>
+			<description audio="assets/sounds/questions/movie5.ogg"><![CDATA[A man makes a business decision after falling asleep on a plane.]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="45" lineHeight="45" spaceX="5" spaceY="10" audio="assets/sounds/questions/movie5_answer.ogg"><![CDATA[INCEPTION]]></question>
+			<description fontSize="20" lineHeight="20" audio="assets/sounds/questions/movie5.ogg"><![CDATA[A man makes a business decision after falling asleep on a plane.]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>GUESS MOVIE NAME</category>
+		<landscape>
+			<question type="0" fontSize="120" audio="assets/sounds/questions/movie6_answer.ogg"><![CDATA[AVATAR]]></question>
+			<description audio="assets/sounds/questions/movie6.ogg"><![CDATA[Cultural appropriation in space.]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="55" lineHeight="55" spaceX="5" spaceY="10" audio="assets/sounds/questions/movie6_answer.ogg"><![CDATA[AVATAR]]></question>
+			<description fontSize="20" lineHeight="20" audio="assets/sounds/questions/movie6.ogg"><![CDATA[Cultural appropriation in space.]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>GUESS MOVIE NAME</category>
+		<landscape>
+			<question type="0" fontSize="120" audio="assets/sounds/questions/movie7_answer.ogg"><![CDATA[E.T.]]></question>
+			<description type="text" align="center" audio="assets/sounds/questions/movie7.ogg"><![CDATA[Alien comes to Earth for beer and candy, touches little boy with "special finger".]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="70" lineHeight="70" audio="assets/sounds/questions/movie7_answer.ogg"><![CDATA[E.T.]]></question>
+			<description fontSize="20" lineHeight="20" audio="assets/sounds/questions/movie7.ogg"><![CDATA[Alien comes to Earth for beer and candy, touches little boy with "special finger".]]>
+			</description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>WORD GAME</category>
+		<landscape>
+			<question type="2" x="50" y="30" bottomX="50" bottomY="50" audio="assets/sounds/questions/word1_a.ogg,assets/sounds/questions/word1_b.ogg,assets/sounds/questions/word1_c.ogg,assets/sounds/questions/word1_d.ogg,assets/sounds/questions/word1_e.ogg,assets/sounds/questions/word1_f.ogg,assets/sounds/questions/word1_h.ogg,assets/sounds/questions/word1_h.ogg"><![CDATA[ROD,WORLD,WORD,LORD,LOW,OWL,ROW,OLD]]></question>
+			<description type="text" align="center"><![CDATA[Form word using available letters. e.g. WORD<br/><br/>[COMPLETE]]]></description>
+			<background top="53" left="30" width="40">assets/item_unuse.svg</background>
+		</landscape>
+		
+		<portrait>
+			<question type="2" spaceX="5" spaceY="10" bottomSpaceX="5" bottomSpaceY="10" bottomFontSize="60" bottomLineHeight="60" x="50" y="30" bottomX="50" bottomY="45" fontSize="70" lineHeight="70" audio="assets/sounds/questions/word1_a.ogg,assets/sounds/questions/word1_b.ogg,assets/sounds/questions/word1_c.ogg,assets/sounds/questions/word1_d.ogg,assets/sounds/questions/word1_e.ogg,assets/sounds/questions/word1_f.ogg,assets/sounds/questions/word1_h.ogg,assets/sounds/questions/word1_h.ogg"><![CDATA[ROD,WORLD,WORD,LORD,LOW,OWL,ROW,OLD]]></question>
+			<description type="text" top="55" align="center" fontSize="20" lineHeight="25"><![CDATA[Form word using available letters. e.g. WORD<br/><br/>[COMPLETE]]]></description>
+			<background top="48" left="12.5" width="75">assets/item_unuse.svg</background>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>WORD GAME</category>
+		<landscape>
+			<question type="2" x="50" y="30" bottomX="50" bottomY="50" audio="assets/sounds/questions/word2_a.ogg,assets/sounds/questions/word2_b.ogg,assets/sounds/questions/word2_c.ogg,assets/sounds/questions/word2_d.ogg,assets/sounds/questions/word2_e.ogg">FINISH,FISH,FINS,IF,FIN</question>
+			<description type="text" align="center"><![CDATA[Form word using available letters. e.g. FISH<br/><br/>[COMPLETE]]]></description>
+			<background top="53" left="30" width="40">assets/item_unuse.svg</background>
+		</landscape>
+		
+		<portrait>
+			<question type="2" spaceX="5" spaceY="10" bottomSpaceX="5" bottomSpaceY="10" bottomFontSize="60" bottomLineHeight="60" x="50" y="30" bottomX="50" bottomY="45" fontSize="70" lineHeight="70" audio="assets/sounds/questions/word2_a.ogg,assets/sounds/questions/word2_b.ogg,assets/sounds/questions/word2_c.ogg,assets/sounds/questions/word2_d.ogg,assets/sounds/questions/word2_e.ogg">FINISH,FISH,FINS,IF,FIN</question>
+			<description type="text" top="55" align="center" fontSize="20" lineHeight="25"><![CDATA[Form word using available letters. e.g. FISH<br/><br/>[COMPLETE]]]></description>
+			<background top="48" left="12.5" width="75">assets/item_unuse.svg</background>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>WORD GAME</category>
+		<landscape>
+			<question type="2" x="50" y="30" bottomX="50" bottomY="50" audio="assets/sounds/questions/word3_a.ogg,assets/sounds/questions/word3_b.ogg,assets/sounds/questions/word3_c.ogg,assets/sounds/questions/word3_d.ogg,assets/sounds/questions/word3_e.ogg,assets/sounds/questions/word3_f.ogg"><![CDATA[BEAR,BARE,ARE,BAR,EAR]]></question>
+			<description type="text" align="center"><![CDATA[Form word using available letters. e.g. BEAR<br/><br/>[COMPLETE]]]></description>
+			<background top="53" left="30" width="40">assets/item_unuse.svg</background>
+		</landscape>
+		
+		<portrait>
+			<question type="2" spaceX="5" spaceY="10" bottomSpaceX="5" bottomSpaceY="10" bottomFontSize="60" bottomLineHeight="60" x="50" y="30" bottomX="50" bottomY="45" fontSize="70" lineHeight="70" audio="assets/sounds/questions/word3_a.ogg,assets/sounds/questions/word3_b.ogg,assets/sounds/questions/word3_c.ogg,assets/sounds/questions/word3_d.ogg,assets/sounds/questions/word3_e.ogg,assets/sounds/questions/word3_f.ogg"><![CDATA[BEAR,BARE,ARE,BAR,EAR,BAR]]></question>
+			<description type="text" top="55" align="center" fontSize="20" lineHeight="25"><![CDATA[Form word using available letters. e.g. BEAR<br/><br/>[COMPLETE]]]></description>
+			<background top="48" left="12.5" width="75">assets/item_unuse.svg</background>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>WORD GAME</category>
+		<landscape>
+			<question type="1" audio="assets/sounds/questions/word4_a.ogg,assets/sounds/questions/word4_b.ogg,assets/sounds/questions/word4_c.ogg"><![CDATA[DARE,READ,DEAR]]></question>
+			<description type="text" align="center"><![CDATA[Form word using available letters. e.g. READ<br/><br/>[COMPLETE]]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="1" spaceX="5" spaceY="10" bottomSpaceX="5" bottomSpaceY="10" bottomFontSize="60" bottomLineHeight="60" fontSize="70" lineHeight="70" audio="assets/sounds/questions/word4_a.ogg,assets/sounds/questions/word4_b.ogg,assets/sounds/questions/word4_c.ogg"><![CDATA[DARE,READ,DEAR]]></question>
+			<description type="text" top="55" align="center" fontSize="20" lineHeight="25"><![CDATA[Form word using available letters. e.g. READ<br/><br/>[COMPLETE]]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>WORD GAME</category>
+		<landscape>
+			<question type="1" audio="assets/sounds/questions/word5_a.ogg,assets/sounds/questions/word5_b.ogg,assets/sounds/questions/word5_c.ogg"><![CDATA[GAME,MAGE,MEGA]]></question>
+			<description type="text" align="center"><![CDATA[Form word using available letters. e.g. GAME<br/><br/>[COMPLETE]]]></description>
+			<background/>
+		</landscape>
+		
+		<portrait>
+			<question type="1" spaceX="5" spaceY="10" bottomSpaceX="5" bottomSpaceY="10" bottomFontSize="60" bottomLineHeight="60" fontSize="70" lineHeight="70" audio="assets/sounds/questions/word5_a.ogg,assets/sounds/questions/word5_b.ogg,assets/sounds/questions/word5_c.ogg"><![CDATA[GAME,MAGE,MEGA]]></question>
+			<description type="text" top="55" align="center" fontSize="20" lineHeight="25"><![CDATA[Form word using available letters. e.g. GAME<br/><br/>[COMPLETE]]]></description>
+			<background/>
+		</portrait>
+	</item>
+	
+	<item>
+		<category>VIDEO</category>
+		<landscape>
+			<question type="0" x="50" y="70"><![CDATA[RABBIT]]></question>
+			<description type="text" top="82" align="center"></description>
+			<background/>
+			<videos autoplay="true" controls="true"><video type="video/mp4">assets/questions/mov_bbb.mp4</video></videos>
+		</landscape>
+		
+		<portrait>
+			<question type="0" fontSize="60" lineHeight="60" spaceX="5" spaceY="10" x="50" y="65"><![CDATA[RABBIT]]></question>
+			<description type="text" fontSize="20" lineHeight="23" align="center" top="70"></description>
+			<background/>
+			<videos left="5" top="22" width="90" height="33" autoplay="true" controls="true"><video type="video/mp4">assets/questions/mov_bbb.mp4</video></videos>
+		</portrait>
+	</item>
+	
+</questions>
