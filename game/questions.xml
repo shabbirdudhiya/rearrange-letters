@@ -5,7 +5,7 @@
 		<thumb name="SUBCATEGORY 1" parent="SUBCATEGORY">assets/item_thumb_picture.svg</thumb>
 		<thumb name="SUBCATEGORY 2" parent="SUBCATEGORY 1">assets/item_thumb_picture.svg</thumb>
 		<thumb name="GUESS MOVIE NAME">assets/item_thumb_movie.svg</thumb>
-		<thumb name="FAMOUSE QUOTE">assets/item_thumb_quote.svg</thumb>
+		<thumb name="FAMOUS QUOTE">assets/item_thumb_quote.svg</thumb>
 		<thumb name="WORD GAME">assets/item_thumb_word.svg</thumb>
 		<thumb name="2 PICS 1 WORD">assets/item_thumb_picture.svg</thumb>
 		<thumb name="RIDDLE">assets/item_thumb_riddle.svg</thumb>
