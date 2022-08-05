@@ -1163,14 +1163,14 @@ function buildQuestion() {
     questionData.abandon = [];
     questionData.abandonPos = [];
 
-    for (var n = 0; n < questionData.sentence.length;) {
+    for (var n = 0; n < questionData.sentence.length; n++) {
         var currentWord = '<div class="fontQuestion resizeFont draggable" data-fontSize="' + questionData.value.fontSize + '" data-lineHeight="' + questionData.value.lineHeight + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px; line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.sentence[n] + '' + questionData.sentence[n + 1] + '' + questionData.sentence[n + 2] + '</div>';
         $('#questionHolder').append(currentWord);
         questionData.pos.push([0, 0]);
         questionData.shuffle.push(n);
     }
 
-    for (var n = 0; n < questionData.word.length;) {
+    for (var n = 0; n < questionData.word.length; n++) {
         var currentWord = '<div class="fontQuestion resizeFont draggable" data-fontSize="' + questionData.value.fontSize + '" data-lineHeight="' + questionData.value.lineHeight + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px;  line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.word[n] + '' + questionData.word[n + 1] + '' + questionData.word[n + 2] + '</div>';
         $('#questionHolder').append(currentWord);
         questionData.pos.push([0, 0]);
@@ -1178,12 +1178,12 @@ function buildQuestion() {
         questionData.shuffle.push(n);
     }
 
-    for (var n = 0; n < questionData.sentence.length;) {
+    for (var n = 0; n < questionData.sentence.length; n++) {
         var currentWord = '<div class="fontQuestion resizeFont fixedPosition" data-fontSize="' + questionData.value.fontSize + '" data-lineHeight="' + questionData.value.lineHeight + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px; line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.sentence[n] + '' + questionData.sentence[n + 1] + '' + questionData.sentence[n + 2] + '</div>';
         $('#questionFixedHolder').append(currentWord);
     }
 
-    for (var n = 0; n < questionData.word.length;) {
+    for (var n = 0; n < questionData.word.length; n++) {
         var currentWord = '<div class="fontQuestion resizeFont fixedPosition" data-fontSize="' + questionData.value.fontSize + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px; line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.word[n] + '' + questionData.word[n + 1] + '' + questionData.word[n + 2] + '</div>';
         $('#questionFixedHolder').append(currentWord);
     }
