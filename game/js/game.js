@@ -15,7 +15,7 @@ var screenSettings = {
     portraitH: 600, //game portrait height
     fitToScreen: true, //fit to browser screen
     maintainAspectRatio: true, //maintain aspect ratio
-    viewportMode: {enable: false, viewport: "portrait", text: "Rotate your device <br/>to portrait"}, //device viewport mode, portrait or landscape
+    viewportMode: { enable: false, viewport: "portrait", text: "Rotate your device <br/>to portrait" }, //device viewport mode, portrait or landscape
 }
 
 //title settings
@@ -181,9 +181,9 @@ var shareSettings = {
  * GAME SETTING CUSTOMIZATION END
  *
  */
-$.editor = {enable: false};
+$.editor = { enable: false };
 
-var playerData = {score: 0, timer: 0};
+var playerData = { score: 0, timer: 0 };
 var gameData = {
     page: '',
     questionNum: 0,
@@ -205,9 +205,9 @@ var gameData = {
     answered: false,
     settings: {}
 };
-var storeData = {status: false, timerDate: 0, revealDate: 0};
+var storeData = { status: false, timerDate: 0, revealDate: 0 };
 
-var titleData = {title: [], shuffle: [], index: 0, status: false};
+var titleData = { title: [], shuffle: [], index: 0, status: false };
 var questionData = {
     type: 0,
     reveal: false,
@@ -229,15 +229,15 @@ var quesLandscape_arr = [];
 var quesPortrait_arr = [];
 var quesLandscapeSequence_arr = [];
 var quesPortraitSequence_arr = [];
-var categoryData = {page: 1, total: 0, thumb: 16, max: 3, level: 0, parent: '', breadcrumb: []};
+var categoryData = { page: 1, total: 0, thumb: 16, max: 3, level: 0, parent: '', breadcrumb: [] };
 
 var audioLandscape_arr = [];
 var audioPortrait_arr = [];
-var audioData = {audioNum: 0, audioInterval: null, playing: false};
+var audioData = { audioNum: 0, audioInterval: null, playing: false };
 
-var dragData = {dx: 0, dy: 0, recoupLeft: 0, recoupTop: 0};
-var timeData = {enable: false, startDate: null, nowDate: null, timer: 0, accumulate: 0, countdown: 0};
-var revealData = {enable: false, startDate: null, nowDate: null, timer: 0, reset: false};
+var dragData = { dx: 0, dy: 0, recoupLeft: 0, recoupTop: 0 };
+var timeData = { enable: false, startDate: null, nowDate: null, timer: 0, accumulate: 0, countdown: 0 };
+var revealData = { enable: false, startDate: null, nowDate: null, timer: 0, reset: false };
 
 var gameSettingsObjects = ['questionSettings', 'timerSettings', 'revealAnswerSettings', 'dragSettings', 'resultSettings', 'shareSettings'];
 var gameSettingsData = {};
@@ -447,8 +447,8 @@ function goPage(page) {
     }
 
     targetContainer.show();
-    TweenMax.to(targetContainer, 0, {opacity: 0, overwrite: true});
-    TweenMax.to(targetContainer, 1, {opacity: 1, overwrite: true});
+    TweenMax.to(targetContainer, 0, { opacity: 0, overwrite: true });
+    TweenMax.to(targetContainer, 1, { opacity: 1, overwrite: true });
     resizeGameDetail();
 }
 
@@ -884,7 +884,7 @@ function positionTitle() {
     var titleIndex = 0;
 
     for (var n = 0; n < titleSettings.text.length; n++) {
-        posArr.push({width: 0, count: 0});
+        posArr.push({ width: 0, count: 0 });
 
         var thisArray = titleSettings.text[n].split("");
         currentW = 0;
@@ -951,7 +951,7 @@ function toggleAniamteTitle(con) {
 
     if (con) {
         $('.titleWord').each(function (index, element) {
-            TweenMax.to($('.titleWord').eq(index), 0, {scale: 1, overwrite: true});
+            TweenMax.to($('.titleWord').eq(index), 0, { scale: 1, overwrite: true });
         });
 
         shuffle(titleData.shuffle);
@@ -1038,7 +1038,7 @@ function loadQuestion() {
     descriptionAudio = descriptionAudio == undefined ? '' : descriptionAudio;
 
     if (descriptionAudio != '') {
-        audioLandscape_arr.push({type: 'description', id: thisMode + 'DescriptionAudio', list: 0});
+        audioLandscape_arr.push({ type: 'description', id: thisMode + 'DescriptionAudio', list: 0 });
         fileFest.push({
             src: quesLandscape_arr[gameData.sequenceNum].description.audio,
             id: thisMode + 'DescriptionAudio'
@@ -1051,8 +1051,8 @@ function loadQuestion() {
     if (answerAudio != '') {
         var audioArray = answerAudio.split(',');
         for (var n = 0; n < audioArray.length; n++) {
-            audioLandscape_arr.push({type: 'answer', id: thisMode + 'AnswerAudio' + n, sort: n});
-            fileFest.push({src: audioArray[n], id: thisMode + 'AnswerAudio' + n})
+            audioLandscape_arr.push({ type: 'answer', id: thisMode + 'AnswerAudio' + n, sort: n });
+            fileFest.push({ src: audioArray[n], id: thisMode + 'AnswerAudio' + n })
         }
     }
 
@@ -1066,13 +1066,13 @@ function loadQuestion() {
     var descriptionType = quesLandscape_arr[gameData.sequenceNum].description.type;
     descriptionType = descriptionType == undefined ? '' : descriptionType;
     if (descriptionType == 'image') {
-        fileFest.push({src: descriptionType, id: thisMode + 'descriptionImage', type: createjs.LoadQueue.IMAGE})
+        fileFest.push({ src: descriptionType, id: thisMode + 'descriptionImage', type: createjs.LoadQueue.IMAGE })
     }
 
     var backgroundImage = quesLandscape_arr[gameData.sequenceNum].background.text;
     backgroundImage = backgroundImage == undefined ? '' : backgroundImage;
     if (backgroundImage != '') {
-        fileFest.push({src: backgroundImage, id: thisMode + 'backgroundImage', type: createjs.LoadQueue.IMAGE})
+        fileFest.push({ src: backgroundImage, id: thisMode + 'backgroundImage', type: createjs.LoadQueue.IMAGE })
     }
 
     //portrait
@@ -1081,7 +1081,7 @@ function loadQuestion() {
     descriptionAudio = descriptionAudio == undefined ? '' : descriptionAudio;
 
     if (descriptionAudio != '') {
-        audioPortrait_arr.push({type: 'description', id: thisMode + 'DescriptionAudio', list: 0});
+        audioPortrait_arr.push({ type: 'description', id: thisMode + 'DescriptionAudio', list: 0 });
         fileFest.push({
             src: quesPortrait_arr[gameData.sequenceNum].description.audio,
             id: thisMode + 'DescriptionAudio'
@@ -1094,21 +1094,21 @@ function loadQuestion() {
     if (answerAudio != '') {
         var audioArray = answerAudio.split(',');
         for (var n = 0; n < audioArray.length; n++) {
-            audioPortrait_arr.push({type: 'answer', id: thisMode + 'AnswerAudio' + n, sort: n});
-            fileFest.push({src: audioArray[n], id: thisMode + 'AnswerAudio' + n})
+            audioPortrait_arr.push({ type: 'answer', id: thisMode + 'AnswerAudio' + n, sort: n });
+            fileFest.push({ src: audioArray[n], id: thisMode + 'AnswerAudio' + n })
         }
     }
 
     var descriptionType = quesPortrait_arr[gameData.sequenceNum].description.type;
     descriptionType = descriptionType == undefined ? '' : descriptionType;
     if (descriptionType == 'image') {
-        fileFest.push({src: descriptionType, id: thisMode + 'descriptionImage', type: createjs.LoadQueue.IMAGE})
+        fileFest.push({ src: descriptionType, id: thisMode + 'descriptionImage', type: createjs.LoadQueue.IMAGE })
     }
 
     var backgroundImage = quesPortrait_arr[gameData.sequenceNum].background.text;
     backgroundImage = backgroundImage == undefined ? '' : backgroundImage;
     if (backgroundImage != '') {
-        fileFest.push({src: backgroundImage, id: thisMode + 'backgroundImage', type: createjs.LoadQueue.IMAGE})
+        fileFest.push({ src: backgroundImage, id: thisMode + 'backgroundImage', type: createjs.LoadQueue.IMAGE })
     }
 
     if (fileFest.length > 0) {
@@ -1163,28 +1163,28 @@ function buildQuestion() {
     questionData.abandon = [];
     questionData.abandonPos = [];
 
-    for (var n = 0; n < questionData.sentence.length; n++) {
-        var currentWord = '<div class="fontQuestion resizeFont draggable" data-fontSize="' + questionData.value.fontSize + '" data-lineHeight="' + questionData.value.lineHeight + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px; line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.sentence[n] + '</div>';
+    for (var n = 0; n < questionData.sentence.length;) {
+        var currentWord = '<div class="fontQuestion resizeFont draggable" data-fontSize="' + questionData.value.fontSize + '" data-lineHeight="' + questionData.value.lineHeight + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px; line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.sentence[n] + '' + questionData.sentence[n + 1] + '' + questionData.sentence[n + 2] + '</div>';
         $('#questionHolder').append(currentWord);
         questionData.pos.push([0, 0]);
         questionData.shuffle.push(n);
     }
 
-    for (var n = 0; n < questionData.word.length; n++) {
-        var currentWord = '<div class="fontQuestion resizeFont draggable" data-fontSize="' + questionData.value.fontSize + '" data-lineHeight="' + questionData.value.lineHeight + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px;  line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.word[n] + '</div>';
+    for (var n = 0; n < questionData.word.length;) {
+        var currentWord = '<div class="fontQuestion resizeFont draggable" data-fontSize="' + questionData.value.fontSize + '" data-lineHeight="' + questionData.value.lineHeight + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px;  line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.word[n] + '' + questionData.word[n + 1] + '' + questionData.word[n + 2] + '</div>';
         $('#questionHolder').append(currentWord);
         questionData.pos.push([0, 0]);
         questionData.abandonPos.push([0, 0]);
         questionData.shuffle.push(n);
     }
 
-    for (var n = 0; n < questionData.sentence.length; n++) {
-        var currentWord = '<div class="fontQuestion resizeFont fixedPosition" data-fontSize="' + questionData.value.fontSize + '" data-lineHeight="' + questionData.value.lineHeight + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px; line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.sentence[n] + '' + questionData.sentence[n + 1] + '</div>';
+    for (var n = 0; n < questionData.sentence.length;) {
+        var currentWord = '<div class="fontQuestion resizeFont fixedPosition" data-fontSize="' + questionData.value.fontSize + '" data-lineHeight="' + questionData.value.lineHeight + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px; line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.sentence[n] + '' + questionData.sentence[n + 1] + '' + questionData.sentence[n + 2] + '</div>';
         $('#questionFixedHolder').append(currentWord);
     }
 
-    for (var n = 0; n < questionData.word.length; n++) {
-        var currentWord = '<div class="fontQuestion resizeFont fixedPosition" data-fontSize="' + questionData.value.fontSize + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px; line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.word[n] + '</div>';
+    for (var n = 0; n < questionData.word.length;) {
+        var currentWord = '<div class="fontQuestion resizeFont fixedPosition" data-fontSize="' + questionData.value.fontSize + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px; line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.word[n] + '' + questionData.word[n + 1] + '' + questionData.word[n + 2] + '</div>';
         $('#questionFixedHolder').append(currentWord);
     }
 
@@ -1280,7 +1280,7 @@ function findLetters(currentText) {
 
         var thisWord = possibleWords[n];
         if (!storeData.status) {
-            questionData.correct.push({word: thisWord, status: false, answer: false});
+            questionData.correct.push({ word: thisWord, status: false, answer: false });
         }
 
         for (var l = 0; l < thisWord.length; l++) {
@@ -1335,7 +1335,7 @@ function setupDragEvents() {
         if (gameData.dragging) {
             playSound('soundPress');
 
-            TweenMax.to($(this), dragSettings.hoverTween, {scale: dragSettings.hoverScale, overwrite: true});
+            TweenMax.to($(this), dragSettings.hoverTween, { scale: dragSettings.hoverScale, overwrite: true });
             $(this).addClass('dragging');
             positionSentenceNow(true);
             shuffleWord($(this));
@@ -1360,7 +1360,7 @@ function setupDragEvents() {
  *
  */
 function shuffleWord(obj) {
-    var position = {x: 0, y: 0};
+    var position = { x: 0, y: 0 };
     position.x = parseInt(obj.css('left')) + (Number(obj.attr('data-width')) / 2);
     position.y = parseInt(obj.css('top')) + (Number(obj.attr('data-height')) / 2);
 
@@ -1393,7 +1393,7 @@ function arrangeWord(obj, position, group) {
     }
 
     var firstIndex = true;
-    var side = {l: 0, r: 0};
+    var side = { l: 0, r: 0 };
     for (var n = 0; n < targetArray.length; n++) {
         var nextIndex = -1;
         var currentIndex = targetArray[n];
@@ -1553,7 +1553,7 @@ function positionSentence(con, group) {
     }
 
     var posArr = [];
-    posArr.push({width: 0, count: 0});
+    posArr.push({ width: 0, count: 0 });
 
     var currentW = 0;
     var posIndex = 0;
@@ -1579,7 +1579,7 @@ function positionSentence(con, group) {
                 posArr[posIndex].count++;
             } else {
                 currentW = Number($('.draggable').eq(currentIndex).attr('data-width'));
-                posArr.push({width: currentW, count: 1});
+                posArr.push({ width: currentW, count: 1 });
                 posIndex++;
             }
         } else {
@@ -1850,7 +1850,7 @@ function animateWord() {
     toggleRevealTimer(false);
     $('#buttonReveal').hide();
 
-    $(".draggable").draggable({disabled: true});
+    $(".draggable").draggable({ disabled: true });
     gameData.readyComplete = false;
 
     stopAudio();
@@ -1923,7 +1923,7 @@ function returnAfterProgress() {
     }
 
     gameData.dragging = true;
-    $(".draggable").draggable({disabled: false});
+    $(".draggable").draggable({ disabled: false });
 }
 
 /*!
@@ -2397,7 +2397,7 @@ function toggleGameTimer(con) {
 }
 
 function loopGameTimer() {
-    TweenMax.to(timeData, .2, {overwrite: true, onComplete: updateGameTimer});
+    TweenMax.to(timeData, .2, { overwrite: true, onComplete: updateGameTimer });
 }
 
 function updateGameTimer() {
@@ -2466,7 +2466,7 @@ function toggleRevealTimer(con, type) {
 }
 
 function loopRevealTimer() {
-    TweenMax.to(revealData, .2, {overwrite: true, onComplete: updateRevealTimer});
+    TweenMax.to(revealData, .2, { overwrite: true, onComplete: updateRevealTimer });
 }
 
 function updateRevealTimer() {
@@ -2697,15 +2697,15 @@ function pushJSONDataArray(questionElement) {
     quesPortrait_arr = [];
 
     if (typeof questionElement.landscape.description == 'undefined') {
-        questionElement.landscape.description = {text: ''};
+        questionElement.landscape.description = { text: '' };
     }
 
     if (typeof questionElement.landscape.background == 'undefined') {
-        questionElement.landscape.background = {text: ''};
+        questionElement.landscape.background = { text: '' };
     }
 
     if (typeof questionElement.landscape.videos == 'undefined') {
-        questionElement.landscape.videos = {video: []};
+        questionElement.landscape.videos = { video: [] };
     }
 
     //landscape
@@ -2776,15 +2776,15 @@ function pushJSONDataArray(questionElement) {
 
     //portrait
     if (typeof questionElement.portrait.description == 'undefined') {
-        questionElement.portrait.description = {text: ''};
+        questionElement.portrait.description = { text: '' };
     }
 
     if (typeof questionElement.portrait.background == 'undefined') {
-        questionElement.portrait.background = {text: ''};
+        questionElement.portrait.background = { text: '' };
     }
 
     if (typeof questionElement.portrait.videos == 'undefined') {
-        questionElement.portrait.videos = {video: []};
+        questionElement.portrait.videos = { video: [] };
     }
 
     //portrait
@@ -3147,7 +3147,7 @@ function toggleFullScreen() {
  *
  */
 function share(action) {
-    gtag('event', 'click', {'event_category': 'share', 'event_label': action});
+    gtag('event', 'click', { 'event_category': 'share', 'event_label': action });
 
     var loc = location.href
     loc = loc.substring(0, loc.lastIndexOf("/") + 1);
