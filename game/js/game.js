@@ -8,6 +8,25 @@
  * 
  */
 
+
+
+
+// GAME SETTING CUSTOMIZATION (OWN)
+var currentWordOfGame = "";
+function hideFontQuestionAndShowTheWord(currentWordOfGame) {
+    // hide font question and show the word
+    $('.fontQuestion').empty();
+    $('#questionHolder').find('.fontQuestion:not(:eq(0))').remove();
+    $('.fontQuestion').html(currentWordOfGame);
+    console.log('hideFontQuestionAndShowTheWord is running');
+}
+// GAME SETTING CUSTOMIZATION END
+
+
+
+
+
+
 var screenSettings = {
     stageW: 1200, //game width
     stageH: 650, //game height
@@ -1144,6 +1163,7 @@ function buildQuestion() {
     var currentText = gameData.targetArray[gameData.sequenceNum].text;
     questionData.value = getArrayValue('question');
     questionData.text = currentText;
+    currentWordOfGame = questionData.text;
 
     questionData.word = [];
     questionData.sentence = [];
@@ -1897,7 +1917,9 @@ function animateWordComplete() {
             gameData.isUserScore = false;
             gameData.isUserCorrect = false;
         }
-
+        // run our custom function to show the completed word
+        console.log(currentWordOfGame);
+        hideFontQuestionAndShowTheWord(currentWordOfGame);
         checkDisplayGameStatus();
     } else {
         //found new word
@@ -1982,7 +2004,6 @@ function displayGameStatus(con) {
     playerData.answer = con;
     $('#buttonReveal').hide();
     $('#gameStatus .gameAnswer').hide();
-
     var displayText = '';
     if (playerData.answer == 'correct') {
         playSound('soundCorrect');
@@ -3174,3 +3195,7 @@ function share(action) {
 
     window.open(shareurl);
 }
+
+
+
+
