@@ -1,82 +1,82 @@
 ////////////////////////////////////////////////////////////
 // EDIT TERMINALS
 ////////////////////////////////////////////////////////////
-var edit = {show:true, xmlFile:'', templateFile:'', mode:'landscape', sortNum:0, templateNum:0, categoryNum:0, videoNum:0, replay:false, con:''};
+var edit = { show: true, xmlFile: '', templateFile: '', mode: 'landscape', sortNum: 0, templateNum: 0, categoryNum: 0, videoNum: 0, replay: false, con: '' };
 
 /*!
  * 
  * EDIT READY
  * 
  */
-$(function() {
-	 $.editor.enable = true;
+$(function () {
+	$.editor.enable = true;
 });
 
-function loadEditPage(){
-	jQuery.ajax({ 
-		 url: "editTools.html", dataType: "html" 
-	}).done(function( responseHtml ) {
+function loadEditPage() {
+	jQuery.ajax({
+		url: "editTools.html", dataType: "html"
+	}).done(function (responseHtml) {
 		$("body").prepend(responseHtml);
-		
-		if($('#mainHolder').hasClass('jsondata')){
-			$( "#selectQuestionWrapper" ).remove();
-			$( "#removeQuestion" ).remove();
-			$( "#sortQuestion" ).remove();
-			$( "#actionCategory" ).remove();
-			$( "#actionSave" ).remove();
-			$( "#categoryWrapper" ).remove();
-			$( "#questionCategory" ).remove();
-			$( "#newQuestion" ).val('Choose Template');
-			$( '#addNewTemplate' ).val('Select');
+
+		if ($('#mainHolder').hasClass('jsondata')) {
+			$("#selectQuestionWrapper").remove();
+			$("#removeQuestion").remove();
+			$("#sortQuestion").remove();
+			$("#actionCategory").remove();
+			$("#actionSave").remove();
+			$("#categoryWrapper").remove();
+			$("#questionCategory").remove();
+			$("#newQuestion").val('Choose Template');
+			$('#addNewTemplate').val('Select');
 
 			$('#templatelist').empty();
-			for(var n=0; n<edit.templateFile.length; n++){
+			for (var n = 0; n < edit.templateFile.length; n++) {
 				$('#templatelist').append($("<option/>", {
 					value: n,
 					text: edit.templateFile[n].landscape.question.text
 				}));
 			};
-		}else{
-			loadTemplateXML('template.xml');	
+		} else {
+			loadTemplateXML('template.xml');
 		}
-		
+
 		buildEditButtons();
 		loadEditQuestion(true);
-		
+
 		$('#editWrapper').show();
 		$('#gameHolder').addClass('editBorder');
 		$('#option').hide();
 	});
 }
 
-function buildEditButtons(){
-	$('#toggleShowOption').click(function(){
+function buildEditButtons() {
+	$('#toggleShowOption').click(function () {
 		toggleShowOption();
 	});
-	
-	$("#modelist").change(function() {
-		if($(this).val() != edit.mode){
+
+	$("#modelist").change(function () {
+		if ($(this).val() != edit.mode) {
 			edit.mode = $(this).val();
 			gameData.mode = $(this).val();
-			
+
 			var modeValue = 'Landscape';
-			if(edit.mode == 'landscape'){
+			if (edit.mode == 'landscape') {
 				modeValue = 'Portrait';
 			}
-			
+
 			$('#gameHolder').removeClass('portraitMode');
-			
-			if(gameData.mode == 'landscape'){
+
+			if (gameData.mode == 'landscape') {
 				gameData.targetArray = quesLandscape_arr;
 				gameData.targetAudio = audioLandscape_arr;
-			}else{
+			} else {
 				$('#gameHolder').addClass('portraitMode');
 				gameData.targetArray = quesPortrait_arr;
-				gameData.targetAudio = audioPortrait_arr;	
+				gameData.targetAudio = audioPortrait_arr;
 			}
-			
-			$('#updateQuestion').val('Update To '+modeValue);
-			
+
+			$('#updateQuestion').val('Update To ' + modeValue);
+
 			loadEditQuestion(true);
 			loadEditDescription();
 			loadEditBackground();
@@ -84,214 +84,214 @@ function buildEditButtons(){
 			resizeGameFunc();
 		}
 	});
-	
+
 	buildQuestionList();
-	
-	$("#questionslist").change(function() {
-		if($(this).val() != ''){
+
+	$("#questionslist").change(function () {
+		if ($(this).val() != '') {
 			gameData.questionNum = Number($(this).val());
 			gameData.sequenceNum = gameData.sequence_arr[gameData.questionNum];
 			edit.videoNum = 0;
 			loadEditQuestion(true);
 		}
 	});
-	
-	$('#sortQuestion').click(function(){
+
+	$('#sortQuestion').click(function () {
 		toggleEditOption('sort');
 	});
-	
-	$('#newQuestion').click(function(){
+
+	$('#newQuestion').click(function () {
 		toggleEditOption('template');
 	});
-	
-	$('#removeQuestion').click(function(){
+
+	$('#removeQuestion').click(function () {
 		actionQuestion('remove');
 	});
-	
-	$('#prevQuestion').click(function(){
+
+	$('#prevQuestion').click(function () {
 		toggleQuestion(false);
 	});
-	
-	$('#nextQuestion').click(function(){
+
+	$('#nextQuestion').click(function () {
 		toggleQuestion(true);
 	});
-	
-	$('#editCategory').click(function(){
+
+	$('#editCategory').click(function () {
 		toggleEditOption('category');
 	});
-	
-	$('#editQuestion').click(function(){
+
+	$('#editQuestion').click(function () {
 		toggleEditOption('question');
 	});
-	
-	$('#editDescription').click(function(){
+
+	$('#editDescription').click(function () {
 		toggleEditOption('description');
 	});
-	
-	$('#editBackground').click(function(){
+
+	$('#editBackground').click(function () {
 		toggleEditOption('background');
 	});
-	
-	$('#editVideo').click(function(){
+
+	$('#editVideo').click(function () {
 		toggleEditOption('video');
 	});
-	
-	$('#generateXML').click(function(){
+
+	$('#generateXML').click(function () {
 		generateXML();
 	});
-	
-	$('#saveXML').click(function(){
+
+	$('#saveXML').click(function () {
 		var n = prompt('Enter password to save.');
-		if ( n!=null && n!="" ) {
+		if (n != null && n != "") {
 			saveXML(n);
 		}
 	});
-	
-	$('#doneQuestion').click(function(){
+
+	$('#doneQuestion').click(function () {
 		updateQuestion(edit.mode);
 		toggleEditOption('');
 	});
-	
-	$('#previewQuestion').click(function(){
+
+	$('#previewQuestion').click(function () {
 		updateQuestion(edit.mode);
 	});
-	
-	$('#updateQuestion').click(function(){
+
+	$('#updateQuestion').click(function () {
 		updateQuestion('landscape');
 		updateQuestion('portrait');
 	});
-	
-	$("#questiontype").change(function() {
+
+	$("#questiontype").change(function () {
 		gameData.targetArray[gameData.sequenceNum].type = $('#questiontype').val();
 		toggleMultiOptions();
 	});
-	
+
 	//template
-	$('#doneTemplate').click(function(){
+	$('#doneTemplate').click(function () {
 		toggleEditOption('');
 	});
-	
-	$('#addNewTemplate').click(function(){
+
+	$('#addNewTemplate').click(function () {
 		actionQuestion('add');
 	});
-	
-	$("#templatelist").change(function() {
-		if($(this).val() != gameData.templateNum){
+
+	$("#templatelist").change(function () {
+		if ($(this).val() != gameData.templateNum) {
 			gameData.templateNum = $(this).val();
 		}
 	});
-	
+
 	//sort
-	$('#moveQuestionUp').click(function(){
+	$('#moveQuestionUp').click(function () {
 		swapQuestion(false);
 	});
-	
-	$('#moveQuestionDown').click(function(){
+
+	$('#moveQuestionDown').click(function () {
 		swapQuestion(true);
 	});
-	
-	$('#doneSort').click(function(){
+
+	$('#doneSort').click(function () {
 		toggleEditOption('');
 	});
-	
-	$("#sortquestionslist").change(function() {
-		if($(this).val() != ''){
+
+	$("#sortquestionslist").change(function () {
+		if ($(this).val() != '') {
 			edit.sortNum = Number($(this).val());
 		}
 	});
-	
+
 	//category
-	$("#categorylist").change(function() {
-		if($(this).val() != ''){
+	$("#categorylist").change(function () {
+		if ($(this).val() != '') {
 			var categoryIndex = edit.tempCategory.indexOf($(this).val());
 			edit.categoryNum = categoryIndex;
 			loadEditCategory();
 		}
 	});
-	
-	$('#addNewCategory').click(function(){
+
+	$('#addNewCategory').click(function () {
 		actionCategory('add');
 	});
-	
-	$('#addNewSubCategory').click(function(){
+
+	$('#addNewSubCategory').click(function () {
 		actionCategory('addSub');
 	});
-	
-	$('#removeCategory').click(function(){
+
+	$('#removeCategory').click(function () {
 		actionCategory('remove');
 	});
-	
-	$('#updateCategory').click(function(){
+
+	$('#updateCategory').click(function () {
 		updateCategory();
 	});
-	
-	$('#doneCategory').click(function(){
+
+	$('#doneCategory').click(function () {
 		updateCategory();
 		toggleEditOption('');
 	});
-	
+
 	//description
-	$('#doneDescription').click(function(){
+	$('#doneDescription').click(function () {
 		updateDescription(edit.mode);
 		toggleEditOption('');
 	});
-	
-	$('#previewDescription').click(function(){
+
+	$('#previewDescription').click(function () {
 		updateDescription();
 		playAudioLoop('description');
 	});
-	
+
 	//background
-	$('#doneBackground').click(function(){
+	$('#doneBackground').click(function () {
 		updateBackground(edit.mode);
 		toggleEditOption('');
 	});
-	
-	$('#previewBackground').click(function(){
+
+	$('#previewBackground').click(function () {
 		updateBackground();
 	});
-	
+
 	//video
-	$("#videoEmbed").change(function() {
-		if($(this).val() != ''){
+	$("#videoEmbed").change(function () {
+		if ($(this).val() != '') {
 			checkVideoArray($(this).val());
 			loadEditVideo();
 		}
 	});
-	
-	$('#removeVideoContainer').click(function(){
+
+	$('#removeVideoContainer').click(function () {
 		actionVideo('removeContainer');
 	});
-	
-	$("#videoslist").change(function() {
-		if($(this).val() != ''){
+
+	$("#videoslist").change(function () {
+		if ($(this).val() != '') {
 			edit.videoNum = Number($(this).val());
 			loadEditVideo();
 		}
 	});
-	
-	$('#prevVideo').click(function(){
+
+	$('#prevVideo').click(function () {
 		toggleVideo(false);
 	});
-	
-	$('#nextVideo').click(function(){
+
+	$('#nextVideo').click(function () {
 		toggleVideo(true);
 	});
-	
-	$('#removeVideo').click(function(){
+
+	$('#removeVideo').click(function () {
 		actionVideo('remove');
 	});
-	
-	$('#addVideo').click(function(){
+
+	$('#addVideo').click(function () {
 		actionVideo('add');
 	});
-	
-	$('#doneVideo').click(function(){
+
+	$('#doneVideo').click(function () {
 		updateVideo(edit.mode);
 		toggleEditOption('');
 	});
-	
-	$('#previewVideo').click(function(){
+
+	$('#previewVideo').click(function () {
 		updateVideo(edit.mode);
 	});
 }
@@ -301,22 +301,22 @@ function buildEditButtons(){
  * TOGGLE DISPLAY OPTION - This is the function that runs to toggle display option
  * 
  */
- 
-function toggleShowOption(){
-	if(edit.show){
+
+function toggleShowOption() {
+	if (edit.show) {
 		edit.show = false;
 		$('#editOption').hide();
 		$('#toggleShowOption').val('Show Edit Option');
-	}else{
+	} else {
 		edit.show = true;
 		$('#editOption').show();
 		$('#toggleShowOption').val('Hide Edit Option');
 	}
 }
 
-function toggleEditOption(con){
+function toggleEditOption(con) {
 	edit.con = con;
-	
+
 	$('#actionWrapper').hide();
 	$('#sortWrapper').hide();
 	$('#templateWrapper').hide();
@@ -326,38 +326,38 @@ function toggleEditOption(con){
 	$('#selectQuestionWrapper').hide();
 	$('#backgroundWrapper').hide();
 	$('#categoryWrapper').hide();
-	
+
 	$('#questionHolder').show();
 	$('#descriptionHolder').show();
 	$('#backgroundHolder').show();
 	$('#videoWrapper').hide();
-	
-	if(con == 'sort'){
+
+	if (con == 'sort') {
 		$('#sortWrapper').show();
-	}else if(con == 'template'){
+	} else if (con == 'template') {
 		gameData.templateNum = -1;
 		$('#templateWrapper').show();
-	}else if(con == 'category'){
+	} else if (con == 'category') {
 		$('#categoryWrapper').show();
 		buildEditCategory();
-	}else if(con == 'question'){
+	} else if (con == 'question') {
 		$('#questionWrapper').show();
 		$('#selectQuestionWrapper').show();
 		$('#multipleWrapper').hide();
 		playAudioLoop();
-	}else if(con == 'description'){
+	} else if (con == 'description') {
 		$('#descriptionWrapper').show();
 		playAudioLoop('description');
-	}else if(con == 'background'){
+	} else if (con == 'background') {
 		$('#backgroundWrapper').show();
-	}else if(con == 'video'){
+	} else if (con == 'video') {
 		$('#videoWrapper').show();
-	}else{
-		$('#actionWrapper').show();	
+	} else {
+		$('#actionWrapper').show();
 		$('#topWrapper').show();
 		$('#selectQuestionWrapper').show();
 	}
-	
+
 	setBorderFocus();
 	loadEditQuestion(false);
 }
@@ -368,15 +368,15 @@ function toggleEditOption(con){
  * TOGGLE QUESTION - This is the function that runs to toggle question
  * 
  */
-function toggleQuestion(con){
-	if(con){
+function toggleQuestion(con) {
+	if (con) {
 		gameData.questionNum++;
 		gameData.questionNum = gameData.questionNum > gameData.targetArray.length - 1 ? 0 : gameData.questionNum;
-	}else{
+	} else {
 		gameData.questionNum--;
 		gameData.questionNum = gameData.questionNum < 0 ? gameData.targetArray.length - 1 : gameData.questionNum;
 	}
-	
+
 	gameData.sequenceNum = gameData.sequence_arr[gameData.questionNum];
 	edit.videoNum = 0;
 	$('#questionslist').prop("selectedIndex", gameData.sequenceNum);
@@ -388,39 +388,39 @@ function toggleQuestion(con){
  * ACTION QUESTION - This is the function that runs to add/remove quesiton
  * 
  */
-function actionQuestion(con){
-	if(con == 'add'){
-		if(gameData.templateNum == -1){
+function actionQuestion(con) {
+	if (con == 'add') {
+		if (gameData.templateNum == -1) {
 			alert('Please select a template to add');
-			return;	
+			return;
 		}
 		toggleEditOption('');
-		
-		if($('#mainHolder').hasClass('jsondata')){
+
+		if ($('#mainHolder').hasClass('jsondata')) {
 			pushJSONDataArray(edit.templateFile[gameData.templateNum]);
-		}else{
+		} else {
 			var newTemplate = $(edit.templateFile).find('item').eq(gameData.templateNum).clone();
 			$(edit.xmlFile).find('questions').append(newTemplate);
 
 			var lastArrayNum = gameData.targetArray.length;
-			$(edit.xmlFile).find('item').each(function(questionIndex, questionElement){
-				if(lastArrayNum == questionIndex){
+			$(edit.xmlFile).find('item').each(function (questionIndex, questionElement) {
+				if (lastArrayNum == questionIndex) {
 					pushDataArray(questionIndex, questionElement);
 				}
 			});
 		}
-		
+
 		filterCategoryQuestion();
-		gameData.questionNum = gameData.targetArray.length-1;
-	}else{
+		gameData.questionNum = gameData.targetArray.length - 1;
+	} else {
 		filterCategoryQuestion();
 		quesLandscape_arr.splice(gameData.sequenceNum, 1);
 		quesPortrait_arr.splice(gameData.sequenceNum, 1);
 		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).remove();
-		
+
 		gameData.questionNum = 0;
 	}
-	
+
 	gameData.sequenceNum = gameData.sequence_arr[gameData.questionNum];
 	filterCategoryQuestion();
 	buildQuestionList();
@@ -432,90 +432,90 @@ function actionQuestion(con){
  * LOAD EDIT QUESTION - This is the function that runs to load question value
  * 
  */
-function loadEditQuestion(con){
+function loadEditQuestion(con) {
 	$('#youtubeTypeWrapper').hide();
 	$('#removeVideoContainer').hide();
-	
+
 	buildEditCategory();
-	
+
 	//edit question
 	$('#category').val(gameData.targetArray[gameData.sequenceNum].category);
-	
+
 	var questionType = Number(gameData.targetArray[gameData.sequenceNum].type);
-	
+
 	$('#questiontype').prop("selectedIndex", questionType);
 	$('#questionText').val(gameData.targetArray[gameData.sequenceNum].text);
 	$('#questionAudio').val(gameData.targetArray[gameData.sequenceNum].audio);
 	$('#questionFontSize').val(gameData.targetArray[gameData.sequenceNum].fontSize);
 	$('#questionLineHeight').val(gameData.targetArray[gameData.sequenceNum].lineHeight);
-	
+
 	var questionX = gameData.targetArray[gameData.sequenceNum].x;
 	questionX = questionX == undefined ? '' : questionX;
 	var questionY = gameData.targetArray[gameData.sequenceNum].y;
 	questionY = questionY == undefined ? '' : questionY;
-	
+
 	var questionSpaceX = gameData.targetArray[gameData.sequenceNum].spaceX;
 	questionSpaceX = questionSpaceX == undefined ? '' : questionSpaceX;
 	var questionSpaceY = gameData.targetArray[gameData.sequenceNum].spaceY;
 	questionSpaceY = questionSpaceY == undefined ? '' : questionSpaceY;
-	
-	$('#questionPosition').val(questionX+','+questionY);
-	$('#questionSpace').val(questionSpaceX+','+questionSpaceY);
+
+	$('#questionPosition').val(questionX + ',' + questionY);
+	$('#questionSpace').val(questionSpaceX + ',' + questionSpaceY);
 	$('#questionColor').val(gameData.targetArray[gameData.sequenceNum].color);
 	$('#questionWidth').val(gameData.targetArray[gameData.sequenceNum].width);
 	$('#questionShadow').val(gameData.targetArray[gameData.sequenceNum].shadow);
 	$('#questionShadowHover').val(gameData.targetArray[gameData.sequenceNum].shadowHover);
-	
+
 	var questionBottomX = gameData.targetArray[gameData.sequenceNum].bottomX;
 	questionBottomX = questionBottomX == undefined ? '' : questionBottomX;
 	var questionBottomY = gameData.targetArray[gameData.sequenceNum].bottomY;
 	questionBottomY = questionBottomY == undefined ? '' : questionBottomY;
-	
+
 	var questionBottomSpaceX = gameData.targetArray[gameData.sequenceNum].bottomSpaceX;
 	questionBottomSpaceX = questionBottomSpaceX == undefined ? '' : questionBottomSpaceX;
 	var questionBottomSpaceY = gameData.targetArray[gameData.sequenceNum].bottomSpaceY;
 	questionBottomSpaceY = questionBottomSpaceY == undefined ? '' : questionBottomSpaceY;
-	
+
 	$('#questionBottomFontSize').val(gameData.targetArray[gameData.sequenceNum].bottomFontSize);
 	$('#questionBottomLineHeight').val(gameData.targetArray[gameData.sequenceNum].bottomLineHeight);
-	$('#questionBottomPosition').val(questionBottomX+','+questionBottomY);
-	$('#questionBottomSpace').val(questionBottomSpaceX+','+questionBottomSpaceY);
+	$('#questionBottomPosition').val(questionBottomX + ',' + questionBottomY);
+	$('#questionBottomSpace').val(questionBottomSpaceX + ',' + questionBottomSpaceY);
 	$('#questionBottomColor').val(gameData.targetArray[gameData.sequenceNum].bottomColor);
 	$('#questionBottomWidth').val(gameData.targetArray[gameData.sequenceNum].bottomWidth);
-	
+
 	loadEditDescription();
 	loadEditBackground();
-	
+
 	//edit video
-	if(gameData.targetArray[gameData.sequenceNum].videos[0] != undefined){
+	if (gameData.targetArray[gameData.sequenceNum].videos[0] != undefined) {
 		$('#videoslist').empty();
-		for(n=0;n<gameData.targetArray[gameData.sequenceNum].videos[0].types.length;n++){
+		for (n = 0; n < gameData.targetArray[gameData.sequenceNum].videos[0].types.length; n++) {
 			$('#videoslist').append($("<option/>", {
 				value: n,
-				text: 'Video Type '+(n+1)+' : ('+gameData.targetArray[gameData.sequenceNum].videos[0].types[n].type+')'
+				text: 'Video Type ' + (n + 1) + ' : (' + gameData.targetArray[gameData.sequenceNum].videos[0].types[n].type + ')'
 			}));
 		}
 		$('#videoslist').prop("selectedIndex", edit.videoNum);
 		loadEditVideo();
-	}else{
+	} else {
 		$('#videoslist').empty();
-		$('#videoSrc').val('');	
+		$('#videoSrc').val('');
 		$('#youtubeSrc').val('');
 	}
-	
+
 	edit.replay = con;
-	
+
 	toggleMultiOptions();
 	loadQuestion();
 }
 
-function toggleMultiOptions(){
+function toggleMultiOptions() {
 	var questionType = Number(gameData.targetArray[gameData.sequenceNum].type);
-	var multi_arr = [1,2];
-	if(multi_arr.indexOf(questionType) != -1){
-		$('#multipleWrapper').show();		
-	}else{
-		$('#multipleWrapper').hide();	
+	var multi_arr = [1, 2];
+	if (multi_arr.indexOf(questionType) != -1) {
+		$('#multipleWrapper').show();
+	} else {
+		$('#multipleWrapper').hide();
 	}
 }
 
@@ -524,23 +524,23 @@ function toggleMultiOptions(){
  * LOAD EDIT DESCRIPTION - This is the function that runs to load description value
  * 
  */
-function loadEditDescription(){
+function loadEditDescription() {
 	var descriptionType = gameData.targetArray[gameData.sequenceNum].description.type == 'image' ? 1 : 0;
 	$('#descriptiontype').prop("selectedIndex", descriptionType);
-	
+
 	var descriptionAlign = gameData.targetArray[gameData.sequenceNum].description.align;
-	if(descriptionAlign == undefined){
+	if (descriptionAlign == undefined) {
 		descriptionAlign = 1;
-	}else{
-		if(descriptionAlign == 'left'){
-			descriptionAlign = 0;	
-		}else if(descriptionAlign == 'center'){
+	} else {
+		if (descriptionAlign == 'left') {
+			descriptionAlign = 0;
+		} else if (descriptionAlign == 'center') {
 			descriptionAlign = 1;
-		}else{
-			descriptionAlign = 2;	
+		} else {
+			descriptionAlign = 2;
 		}
 	}
-	
+
 	$('#descriptionText').val(gameData.targetArray[gameData.sequenceNum].description.text);
 	$('#descriptionFontSize').val(gameData.targetArray[gameData.sequenceNum].description.fontSize);
 	$('#descriptionLineHeight').val(gameData.targetArray[gameData.sequenceNum].description.lineHeight);
@@ -551,7 +551,7 @@ function loadEditDescription(){
 	$('#descriptionColor').val(gameData.targetArray[gameData.sequenceNum].description.color);
 	$('#descriptionAlign').prop("selectedIndex", descriptionAlign);
 	$('#descriptionAudio').val(gameData.targetArray[gameData.sequenceNum].description.audio);
-	
+
 	setBorderFocus();
 }
 
@@ -560,13 +560,13 @@ function loadEditDescription(){
  * LOAD EDIT DESCRIPTION - This is the function that runs to load description value
  * 
  */
-function loadEditBackground(){
+function loadEditBackground() {
 	$('#backgroundPath').val(gameData.targetArray[gameData.sequenceNum].background.text);
 	$('#backgroundWidth').val(gameData.targetArray[gameData.sequenceNum].background.width);
 	$('#backgroundHeight').val(gameData.targetArray[gameData.sequenceNum].background.height);
 	$('#backgroundTop').val(gameData.targetArray[gameData.sequenceNum].background.top);
 	$('#backgroundLeft').val(gameData.targetArray[gameData.sequenceNum].background.left);
-	
+
 	setBorderFocus();
 }
 
@@ -575,11 +575,11 @@ function loadEditBackground(){
  * UPDATE QUESTION - This is the function that runs to update question value
  * 
  */
-function updateQuestion(){
+function updateQuestion() {
 	//update array
 	quesLandscape_arr[gameData.sequenceNum].category = $('#category').val();
 	quesPortrait_arr[gameData.sequenceNum].category = $('#category').val();
-	
+
 	var questionFontSize = $('#questionFontSize').val();
 	questionFontSize = questionFontSize == 0 ? undefined : questionFontSize;
 	var questionLineHeight = $('#questionLineHeight').val();
@@ -600,12 +600,12 @@ function updateQuestion(){
 	questionShadow = questionShadow == 0 ? undefined : questionShadow;
 	var questionShadowHover = $('#questionShadowHover').val();
 	questionShadowHover = questionShadowHover == 0 ? undefined : questionShadowHover;
-	
+
 	var questionBottomFontSize = $('#questionBottomFontSize').val();
 	questionBottomFontSize = questionBottomFontSize == 0 ? undefined : questionBottomFontSize;
 	var questionBottomLineHeight = $('#questionBottomLineHeight').val();
 	questionBottomLineHeight = questionBottomLineHeight == 0 ? undefined : questionBottomLineHeight;
-	
+
 	var quetionBottomPosition = $('#questionBottomPosition').val().split(',');
 	var questionBottomX = quetionBottomPosition[0];
 	questionBottomX = questionBottomX == 0 ? undefined : questionBottomX;
@@ -618,7 +618,7 @@ function updateQuestion(){
 	questionBottomSpaceY = questionBottomSpaceY == 0 ? undefined : questionBottomSpaceY;
 	var questionBottomWidth = $('#questionBottomWidth').val();
 	questionBottomWidth = questionBottomWidth == 0 ? undefined : questionBottomWidth;
-	
+
 	gameData.targetArray[gameData.sequenceNum].type = $('#questiontype').val();
 	gameData.targetArray[gameData.sequenceNum].fontSize = questionFontSize;
 	gameData.targetArray[gameData.sequenceNum].lineHeight = questionLineHeight;
@@ -632,7 +632,7 @@ function updateQuestion(){
 	gameData.targetArray[gameData.sequenceNum].width = questionWidth;
 	gameData.targetArray[gameData.sequenceNum].shadow = questionShadow;
 	gameData.targetArray[gameData.sequenceNum].shadowHover = questionShadowHover;
-	
+
 	gameData.targetArray[gameData.sequenceNum].bottomFontSize = questionBottomFontSize;
 	gameData.targetArray[gameData.sequenceNum].bottomLineHeight = questionBottomLineHeight;
 	gameData.targetArray[gameData.sequenceNum].bottomX = questionBottomX;
@@ -641,35 +641,35 @@ function updateQuestion(){
 	gameData.targetArray[gameData.sequenceNum].bottomSpaceY = questionBottomSpaceY;
 	gameData.targetArray[gameData.sequenceNum].bottomColor = $('#questionBottomColor').val();
 	gameData.targetArray[gameData.sequenceNum].bottomWidth = questionBottomWidth;
-	
+
 	//update XML
 	$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find('category').text($('#category').val());
-	
+
 	$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('question').attr('type', $('#questiontype').val());
-	
-	$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('question').html('<![CDATA['+$('#questionText').val()+']]>');
-	
-	updateXMLFirst('question','audio',$('#questionAudio').val());
-	updateXMLFirst('question','fontSize',questionFontSize, true);
-	updateXMLFirst('question','lineHeight',questionLineHeight, true);
-	updateXMLFirst('question','x',questionLineHeight, true);
-	updateXMLFirst('question','questionX',questionX, true);
-	updateXMLFirst('question','questionY',questionY, true);
-	updateXMLFirst('question','questionSpaceX',questionSpaceX, true);
-	updateXMLFirst('question','questionSpaceY',questionSpaceY, true);
-	updateXMLFirst('question','questionSpaceY',questionShadow, true);
-	updateXMLFirst('question','questionSpaceY',questionShadowHover, true);
-	updateXMLFirst('question','questionSpaceY',questionBottomFontSize, true);
-	updateXMLFirst('question','questionSpaceY',questionBottomLineHeight, true);
-	updateXMLFirst('question','questionSpaceY',questionBottomX, true);
-	updateXMLFirst('question','questionSpaceY',questionBottomY, true);
-	updateXMLFirst('question','questionSpaceY',questionBottomSpaceX, true);
-	updateXMLFirst('question','questionSpaceY',questionBottomSpaceY, true);
-	updateXMLFirst('question','questionSpaceY',questionBottomWidth, true);
-	updateXMLFirst('question','color',$('#questionColor').val());
-	updateXMLFirst('question','color',$('#questionBottomColor').val());
-	updateXMLFirst('question','color',$('#questionBottomColor').val());
-	
+
+	$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('question').html('<![CDATA[' + $('#questionText').val() + ']]>');
+
+	updateXMLFirst('question', 'audio', $('#questionAudio').val());
+	updateXMLFirst('question', 'fontSize', questionFontSize, true);
+	updateXMLFirst('question', 'lineHeight', questionLineHeight, true);
+	updateXMLFirst('question', 'x', questionLineHeight, true);
+	updateXMLFirst('question', 'questionX', questionX, true);
+	updateXMLFirst('question', 'questionY', questionY, true);
+	updateXMLFirst('question', 'questionSpaceX', questionSpaceX, true);
+	updateXMLFirst('question', 'questionSpaceY', questionSpaceY, true);
+	updateXMLFirst('question', 'questionSpaceY', questionShadow, true);
+	updateXMLFirst('question', 'questionSpaceY', questionShadowHover, true);
+	updateXMLFirst('question', 'questionSpaceY', questionBottomFontSize, true);
+	updateXMLFirst('question', 'questionSpaceY', questionBottomLineHeight, true);
+	updateXMLFirst('question', 'questionSpaceY', questionBottomX, true);
+	updateXMLFirst('question', 'questionSpaceY', questionBottomY, true);
+	updateXMLFirst('question', 'questionSpaceY', questionBottomSpaceX, true);
+	updateXMLFirst('question', 'questionSpaceY', questionBottomSpaceY, true);
+	updateXMLFirst('question', 'questionSpaceY', questionBottomWidth, true);
+	updateXMLFirst('question', 'color', $('#questionColor').val());
+	updateXMLFirst('question', 'color', $('#questionBottomColor').val());
+	updateXMLFirst('question', 'color', $('#questionBottomColor').val());
+
 	loadEditQuestion(true);
 }
 
@@ -678,7 +678,7 @@ function updateQuestion(){
  * UPDATE EXPLANATION - This is the function that runs to update explanation value
  * 
  */
-function updateDescription(){
+function updateDescription() {
 	//update array
 	var descriptionFontSize = $('#descriptionFontSize').val();
 	descriptionFontSize = descriptionFontSize == 0 ? undefined : descriptionFontSize;
@@ -692,7 +692,7 @@ function updateDescription(){
 	descriptionWidth = descriptionWidth == 0 ? undefined : descriptionWidth;
 	var descriptionHeight = $('#descriptionHeight').val();
 	descriptionHeight = descriptionHeight == 0 ? undefined : descriptionHeight;
-	
+
 	gameData.targetArray[gameData.sequenceNum].description.type = $('#descriptiontype').val();
 	gameData.targetArray[gameData.sequenceNum].description.fontSize = descriptionFontSize;
 	gameData.targetArray[gameData.sequenceNum].description.lineHeight = descriptionLineHeight;
@@ -704,30 +704,30 @@ function updateDescription(){
 	gameData.targetArray[gameData.sequenceNum].description.text = $('#descriptionText').val();
 	gameData.targetArray[gameData.sequenceNum].description.color = $('#descriptionColor').val();
 	gameData.targetArray[gameData.sequenceNum].description.audio = $('#descriptionAudio').val();
-	
-	if($(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('description').length == 0){
-		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).append('<description />');	
+
+	if ($(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('description').length == 0) {
+		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).append('<description />');
 	}
-	
+
 	//update XML
 	$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('description').attr('type', $('#descriptiontype').val());
-	
-	if($('#descriptiontype').val() == 'text'){
-		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('description').html('<![CDATA['+$('#descriptionText').val()+']]>');
-	}else{
+
+	if ($('#descriptiontype').val() == 'text') {
+		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('description').html('<![CDATA[' + $('#descriptionText').val() + ']]>');
+	} else {
 		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('description').html($('#descriptionText').val());
 	}
-	
-	updateXMLChild('description','fontSize',descriptionFontSize, true);
-	updateXMLChild('description','lineHeight',descriptionLineHeight, true);
-	updateXMLChild('description','top',descriptionTop, true);
-	updateXMLChild('description','left',descriptionLeft, true);
-	updateXMLChild('description','width',descriptionWidth, true);
-	updateXMLChild('description','height',descriptionHeight, true);
-	updateXMLChild('description','align',$('#descriptionAlign').val());
-	updateXMLChild('description','audio',$('#descriptionAudio').val());
-	updateXMLChild('description','color',$('#descriptionColor').val());
-	
+
+	updateXMLChild('description', 'fontSize', descriptionFontSize, true);
+	updateXMLChild('description', 'lineHeight', descriptionLineHeight, true);
+	updateXMLChild('description', 'top', descriptionTop, true);
+	updateXMLChild('description', 'left', descriptionLeft, true);
+	updateXMLChild('description', 'width', descriptionWidth, true);
+	updateXMLChild('description', 'height', descriptionHeight, true);
+	updateXMLChild('description', 'align', $('#descriptionAlign').val());
+	updateXMLChild('description', 'audio', $('#descriptionAudio').val());
+	updateXMLChild('description', 'color', $('#descriptionColor').val());
+
 	loadEditQuestion(true);
 }
 
@@ -736,7 +736,7 @@ function updateDescription(){
  * UPDATE BACKGROUND - This is the function that runs to update explanation value
  * 
  */
-function updateBackground(){
+function updateBackground() {
 	//update array
 	var bgTop = $('#backgroundTop').val();
 	bgTop = bgTop == 0 ? undefined : bgTop;
@@ -746,25 +746,25 @@ function updateBackground(){
 	bgWidth = bgWidth == 0 ? undefined : bgWidth;
 	var bgHeight = $('#backgroundHeight').val();
 	bgHeight = bgHeight == 0 ? undefined : bgHeight;
-	
+
 	gameData.targetArray[gameData.sequenceNum].background.top = bgTop;
 	gameData.targetArray[gameData.sequenceNum].background.left = bgLeft;
 	gameData.targetArray[gameData.sequenceNum].background.width = bgWidth;
 	gameData.targetArray[gameData.sequenceNum].background.height = bgHeight;
 	gameData.targetArray[gameData.sequenceNum].background.text = $('#backgroundPath').val();
-	
-	if($(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('background').length == 0){
-		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).append('<background />');	
+
+	if ($(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('background').length == 0) {
+		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).append('<background />');
 	}
-	
+
 	//update XML
 	$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('background').html($('#backgroundPath').val());
-	
-	updateXMLChild('background','left',bgLeft, true);
-	updateXMLChild('background','top',bgTop, true);
-	updateXMLChild('background','width',bgWidth, true);
-	updateXMLChild('background','height',bgHeight, true);
-	
+
+	updateXMLChild('background', 'left', bgLeft, true);
+	updateXMLChild('background', 'top', bgTop, true);
+	updateXMLChild('background', 'width', bgWidth, true);
+	updateXMLChild('background', 'height', bgHeight, true);
+
 	loadEditQuestion(true);
 }
 
@@ -773,42 +773,44 @@ function updateBackground(){
  * GENERATE ARRAY - This is the function that runs to generate array
  * 
  */
-function generateXML(){
+function generateXML() {
 	var xmlstr = edit.xmlFile.xml ? edit.xmlFile.xml : (new XMLSerializer()).serializeToString(edit.xmlFile);
 	$('#outputXML').val(xmlstr);
 }
 
-function saveXML(pass){
+function saveXML(pass) {
 	var xmlstr = edit.xmlFile.xml ? edit.xmlFile.xml : (new XMLSerializer()).serializeToString(edit.xmlFile);
-	
+
 	$.ajax({
 		type: "POST",
 		url: "save.php",
-		data: {password:pass,
-				data:xmlstr}
-				
-	}).done(function(o) {
+		data: {
+			password: pass,
+			data: xmlstr
+		}
+
+	}).done(function (o) {
 		try {
 			$.parseJSON(o);
 		} catch (e) {
 			alert('Error, file cannot save!');
 		}
-		
+
 		var data = $.parseJSON(o);
 		if (!data || data === null) {
 			alert('Error, file cannot save!');
-		}else{
-			if(data.status==true){
+		} else {
+			if (data.status == true) {
 				alert('File save successful!');
-			}else{
-				if(data.option==true){
+			} else {
+				if (data.option == true) {
 					alert('Wrong password, file cannot save!');
-				}else{
+				} else {
 					alert('Save option disabled!');
 				}
 			}
 		}
-	});	
+	});
 }
 
 /*!
@@ -816,22 +818,22 @@ function saveXML(pass){
  * LOAD TEMPLATE XML - This is the function that runs to load template xml file
  * 
  */
-function loadTemplateXML(src){
+function loadTemplateXML(src) {
 	$.ajax({
-       url: src,
-       type: "GET",
-       dataType: "xml",
-       success: function (result) {
+		url: src,
+		type: "GET",
+		dataType: "xml",
+		success: function (result) {
 			edit.templateFile = result;
-			
+
 			$('#templatelist').empty();
-			$(edit.templateFile).find('item').each(function(index, element) {
+			$(edit.templateFile).find('item').each(function (index, element) {
 				$('#templatelist').append($("<option/>", {
 					value: index,
 					text: $(element).find('landscape type').text()
 				}));
-            });
-       }
+			});
+		}
 	});
 }
 
@@ -840,50 +842,50 @@ function loadTemplateXML(src){
  * SWAP QUESTION - This is the function that runs to swap question
  * 
  */
-function swapQuestion(con){
+function swapQuestion(con) {
 	var tmpLandscape = quesLandscape_arr[edit.sortNum];
 	var tmpPortrait = quesPortrait_arr[edit.sortNum];
 	var tmpXML = $(edit.xmlFile).find('item').eq(edit.sortNum).clone();
-	
+
 	edit.sortNum = Number(edit.sortNum);
-	if(con){
-		if(edit.sortNum+1 < quesLandscape_arr.length){
-			quesLandscape_arr[edit.sortNum] = quesLandscape_arr[edit.sortNum+1];
-			quesLandscape_arr[edit.sortNum+1] = tmpLandscape;
-			
-			quesPortrait_arr[edit.sortNum] = quesPortrait_arr[edit.sortNum+1];
-			quesPortrait_arr[edit.sortNum+1] = tmpPortrait;
-			
-			$(edit.xmlFile).find('item').eq(edit.sortNum).replaceWith($(edit.xmlFile).find('item').eq(edit.sortNum+1).clone());
-			$(edit.xmlFile).find('item').eq(edit.sortNum+1).replaceWith(tmpXML);
-			
+	if (con) {
+		if (edit.sortNum + 1 < quesLandscape_arr.length) {
+			quesLandscape_arr[edit.sortNum] = quesLandscape_arr[edit.sortNum + 1];
+			quesLandscape_arr[edit.sortNum + 1] = tmpLandscape;
+
+			quesPortrait_arr[edit.sortNum] = quesPortrait_arr[edit.sortNum + 1];
+			quesPortrait_arr[edit.sortNum + 1] = tmpPortrait;
+
+			$(edit.xmlFile).find('item').eq(edit.sortNum).replaceWith($(edit.xmlFile).find('item').eq(edit.sortNum + 1).clone());
+			$(edit.xmlFile).find('item').eq(edit.sortNum + 1).replaceWith(tmpXML);
+
 			edit.sortNum++;
 		}
-	}else{
-		if(edit.sortNum-1 >= 0){
-			quesLandscape_arr[edit.sortNum] = quesLandscape_arr[edit.sortNum-1];
-			quesLandscape_arr[edit.sortNum-1] = tmpLandscape;
-			
-			quesPortrait_arr[edit.sortNum] = quesPortrait_arr[edit.sortNum-1];
-			quesPortrait_arr[edit.sortNum-1] = tmpPortrait;
-			
-			$(edit.xmlFile).find('item').eq(edit.sortNum).replaceWith($(edit.xmlFile).find('item').eq(edit.sortNum-1).clone());
-			$(edit.xmlFile).find('item').eq(edit.sortNum-1).replaceWith(tmpXML);
-			
+	} else {
+		if (edit.sortNum - 1 >= 0) {
+			quesLandscape_arr[edit.sortNum] = quesLandscape_arr[edit.sortNum - 1];
+			quesLandscape_arr[edit.sortNum - 1] = tmpLandscape;
+
+			quesPortrait_arr[edit.sortNum] = quesPortrait_arr[edit.sortNum - 1];
+			quesPortrait_arr[edit.sortNum - 1] = tmpPortrait;
+
+			$(edit.xmlFile).find('item').eq(edit.sortNum).replaceWith($(edit.xmlFile).find('item').eq(edit.sortNum - 1).clone());
+			$(edit.xmlFile).find('item').eq(edit.sortNum - 1).replaceWith(tmpXML);
+
 			edit.sortNum--;
 		}
 	}
-	
+
 	filterCategoryQuestion();
 	buildQuestionList();
 	scrollSelectTo(edit.sortNum);
 	loadEditQuestion(false);
 }
 
-function scrollSelectTo(num){
+function scrollSelectTo(num) {
 	$('#sortquestionslist').prop("selectedIndex", edit.sortNum);
 	var $s = $('#sortquestionslist');
-	var optionTop = $s.find('[value="'+num+'"]').offset().top;
+	var optionTop = $s.find('[value="' + num + '"]').offset().top;
 	var selectTop = $s.offset().top;
 	$s.scrollTop($s.scrollTop() + (optionTop - selectTop));
 }
@@ -893,54 +895,54 @@ function scrollSelectTo(num){
  * BUILD CATEGORY LIST - This is the function that runs to build category list
  * 
  */
-function buildEditCategory(){
+function buildEditCategory() {
 	$('#categorylist').empty();
 	$('#category').empty();
-	
+
 	edit.tempCategory = [];
-	$(edit.xmlFile).find('thumb').each(function(index, element) {
+	$(edit.xmlFile).find('thumb').each(function (index, element) {
 		edit.tempCategory.push($(element).attr('name'));
 	});
-	
+
 	var matchCategory = [];
-	for(var n=0; n<5; n++){
+	for (var n = 0; n < 5; n++) {
 		var newCategory = [];
 		var newSubCategory = [];
-		
-		$(edit.xmlFile).find('thumb').each(function(index, element) {
-			if(n == 0){
-				if($(element).attr('parent') == '' || $(element).attr('parent') == undefined){
+
+		$(edit.xmlFile).find('thumb').each(function (index, element) {
+			if (n == 0) {
+				if ($(element).attr('parent') == '' || $(element).attr('parent') == undefined) {
 					matchCategory.push($(element).attr('name'));
 					buildEditCategoryDD($(element).attr('name'), n);
 				}
-			}else{
-				if(matchCategory.indexOf($(element).attr('parent')) != -1){
+			} else {
+				if (matchCategory.indexOf($(element).attr('parent')) != -1) {
 					newCategory.unshift($(element).attr('name'));
-					newSubCategory.unshift({name:$(element).attr('name'), level:n, parent:$(element).attr('parent')});
+					newSubCategory.unshift({ name: $(element).attr('name'), level: n, parent: $(element).attr('parent') });
 				}
 			}
 		});
-		
-		if(n > 0){
-			if(newCategory.length > 0){
-				for(var s=0; s<newSubCategory.length; s++){
-					buildEditCategoryDD(newSubCategory[s].name, newSubCategory[s].level, newSubCategory[s].parent);	
+
+		if (n > 0) {
+			if (newCategory.length > 0) {
+				for (var s = 0; s < newSubCategory.length; s++) {
+					buildEditCategoryDD(newSubCategory[s].name, newSubCategory[s].level, newSubCategory[s].parent);
 				}
 				matchCategory = newCategory;
-			}else{
+			} else {
 				n = 5;
 			}
 		}
 	}
-	
+
 	edit.categoryNum = 0;
 	$('#categorylist').prop("selectedIndex", 0);
 	$('#category').prop("selectedIndex", 0);
 	loadEditCategory();
 }
 
-function buildEditCategoryDD(name, level, parent){
-	if(level == 0){
+function buildEditCategoryDD(name, level, parent) {
+	if (level == 0) {
 		$('#categorylist').append($("<option/>", {
 			value: name,
 			text: name
@@ -950,22 +952,22 @@ function buildEditCategoryDD(name, level, parent){
 			value: name,
 			text: name
 		}));
-	}else{
+	} else {
 		var symbol = '';
-		for(var s=0; s<level;s++){
+		for (var s = 0; s < level; s++) {
 			symbol += ' -  ';
 		}
-		
+
 		$("#categorylist").val(parent);
 		$('#categorylist option:selected').after($("<option/>", {
 			value: name,
-			text: symbol+name
+			text: symbol + name
 		}));
-		
+
 		$("#category").val(parent);
 		$('#category option:selected').after($("<option/>", {
 			value: name,
-			text: symbol+name
+			text: symbol + name
 		}));
 	}
 }
@@ -976,7 +978,7 @@ function buildEditCategoryDD(name, level, parent){
  * LOAD CATEGORY VALUE - This is the function that runs to load category list
  * 
  */
-function loadEditCategory(){
+function loadEditCategory() {
 	$('#categoryName').val($(edit.xmlFile).find('thumb').eq(edit.categoryNum).attr('name'));
 	$('#categoryThumbnail').val($(edit.xmlFile).find('thumb').eq(edit.categoryNum).text());
 }
@@ -986,37 +988,37 @@ function loadEditCategory(){
  * ACTION CATEGORY - This is the function that runs to action category
  * 
  */
-function actionCategory(con){
-	if(con == 'add'){
+function actionCategory(con) {
+	if (con == 'add') {
 		var newTemplate = '<thumb name="CATEGORY">assets/item_thumb.svg</thumb>';
 		$(edit.xmlFile).find('category').eq(0).append(newTemplate);
-	}else if(con == 'addSub'){
-		var newTemplate = '<thumb name="CATEGORY" parent="'+$("#categorylist").val()+'">assets/item_thumb.png</thumb>';
+	} else if (con == 'addSub') {
+		var newTemplate = '<thumb name="CATEGORY" parent="' + $("#categorylist").val() + '">assets/item_thumb.png</thumb>';
 		$(edit.xmlFile).find('category').eq(0).append(newTemplate);
-	}else{
+	} else {
 		$(edit.xmlFile).find('thumb').eq(edit.categoryNum).remove();
 		removeQuestiosCategory();
 		edit.categoryNum = 0;
 	}
-	
+
 	buildEditCategory();
 }
 
-function removeQuestiosCategory(){
+function removeQuestiosCategory() {
 	var categoryArray = [];
-	$(edit.xmlFile).find('thumb').each(function(index, element) {
+	$(edit.xmlFile).find('thumb').each(function (index, element) {
 		categoryArray.push($(element).attr('name'));
 	});
-	
-	for(var n=0; n<quesLandscape_arr.length; n++){
-		if(categoryArray.indexOf(quesLandscape_arr[n].category) == -1){
+
+	for (var n = 0; n < quesLandscape_arr.length; n++) {
+		if (categoryArray.indexOf(quesLandscape_arr[n].category) == -1) {
 			quesLandscape_arr[n].category = '';
 			$(edit.xmlFile).find('item').eq(n).find('category').text('');
 		}
 	}
-	
-	for(var n=0; n<quesPortrait_arr.length; n++){
-		if(categoryArray.indexOf(quesPortrait_arr[n].category) == -1){
+
+	for (var n = 0; n < quesPortrait_arr.length; n++) {
+		if (categoryArray.indexOf(quesPortrait_arr[n].category) == -1) {
 			quesPortrait_arr[n].category = '';
 			$(edit.xmlFile).find('item').eq(n).find('category').text('');
 		}
@@ -1028,7 +1030,7 @@ function removeQuestiosCategory(){
  * UPDATE CATEGORY - This is the function that runs to update category
  * 
  */
-function updateCategory(){
+function updateCategory() {
 	$(edit.xmlFile).find('thumb').eq(edit.categoryNum).attr('name', $('#categoryName').val());
 	$(edit.xmlFile).find('thumb').eq(edit.categoryNum).text($('#categoryThumbnail').val());
 	buildEditCategory()
@@ -1039,22 +1041,22 @@ function updateCategory(){
  * BUILD QUESTION LIST - This is the function that runs to build question list
  * 
  */
-function buildQuestionList(){
+function buildQuestionList() {
 	$('#questionslist').empty();
 	$('#sortquestionslist').empty();
-	
-	for(n=0;n<quesLandscape_arr.length;n++){
+
+	for (n = 0; n < quesLandscape_arr.length; n++) {
 		$('#questionslist').append($("<option/>", {
 			value: n,
-			text: 'Question '+(n+1)+' : ('+quesLandscape_arr[n].text+')'
+			text: 'Question ' + (n + 1) + ' : (' + quesLandscape_arr[n].text + ')'
 		}));
 		$('#sortquestionslist').append($("<option/>", {
 			value: n,
-			text: (n+1)+' : '+quesLandscape_arr[n].text
+			text: (n + 1) + ' : ' + quesLandscape_arr[n].text
 		}));
 	}
-	
-	$('#questionslist').prop("selectedIndex", gameData.sequenceNum);	
+
+	$('#questionslist').prop("selectedIndex", gameData.sequenceNum);
 }
 
 /*!
@@ -1062,15 +1064,15 @@ function buildQuestionList(){
  * TOGGLE VIDEOS - This is the function that runs to toggle video
  * 
  */
-function toggleVideo(con){
-	if(con){
+function toggleVideo(con) {
+	if (con) {
 		edit.videoNum++;
 		edit.videoNum = edit.videoNum > gameData.targetArray[gameData.sequenceNum].videos[0].types.length - 1 ? 0 : edit.videoNum;
-	}else{
+	} else {
 		edit.videoNum--;
 		edit.videoNum = edit.videoNum < 0 ? gameData.targetArray[gameData.sequenceNum].videos[0].types.length - 1 : edit.videoNum;
 	}
-	
+
 	$('#videoslist').prop("selectedIndex", edit.videoNum);
 	loadEditVideo();
 }
@@ -1080,45 +1082,45 @@ function toggleVideo(con){
  * ACTION VIDEO - This is the function that runs to add/remove video
  * 
  */
-function actionVideo(con){
-	if(con == 'add'){
-		if(gameData.targetArray[gameData.sequenceNum].videos[0] == undefined){
+function actionVideo(con) {
+	if (con == 'add') {
+		if (gameData.targetArray[gameData.sequenceNum].videos[0] == undefined) {
 			gameData.targetArray[gameData.sequenceNum].videos = [];
 			gameData.targetArray[gameData.sequenceNum].videos.push({
-																	width:'',
-																	height:'',
-																	top:'',
-																	left:'',
-																	autoplay:true,
-																	controls:true,
-																	embed:'html',
-																	types:[]
-																})
+				width: '',
+				height: '',
+				top: '',
+				left: '',
+				autoplay: true,
+				controls: true,
+				embed: 'html',
+				types: []
+			})
 		}
-		
+
 		gameData.targetArray[gameData.sequenceNum].videos[0].types.push({
-																	src:'',
-																	type:'video/mp4'
-																});
-																
+			src: '',
+			type: 'video/mp4'
+		});
+
 		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos').append('<video></video>');
 		$('#videoSrc').val('');
 		$('#youtubeSrc').val('');
-		
-		edit.videoNum = gameData.targetArray[gameData.sequenceNum].videos[0].types.length-1;
+
+		edit.videoNum = gameData.targetArray[gameData.sequenceNum].videos[0].types.length - 1;
 		updateVideo();
-	}else if(con == 'remove'){
+	} else if (con == 'remove') {
 		gameData.targetArray[gameData.sequenceNum].videos[0].types.splice(edit.videoNum, 1);
 		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos video').eq(edit.videoNum).remove();
-		
+
 		edit.videoNum = 0;
-		loadEditQuestion(false);	
-	}else{
+		loadEditQuestion(false);
+	} else {
 		gameData.targetArray[gameData.sequenceNum].videos[0] = undefined;
 		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos').eq(0).remove();
-		
+
 		edit.videoNum = 0;
-		loadEditQuestion(false);	
+		loadEditQuestion(false);
 	}
 }
 
@@ -1127,77 +1129,77 @@ function actionVideo(con){
  * LOAD EDIT VIDEO - This is the function that runs to load video value
  * 
  */
-function checkVideoArray(embed){
+function checkVideoArray(embed) {
 	actionVideo('removeContainer');
-	if(gameData.targetArray[gameData.sequenceNum].videos[0] == undefined){
+	if (gameData.targetArray[gameData.sequenceNum].videos[0] == undefined) {
 		actionVideo('add');
 	}
-	
+
 	gameData.targetArray[gameData.sequenceNum].videos[0].embed = embed;
 	edit.videoNum = 0;
 }
 
-function loadEditVideo(){
-	if(gameData.targetArray[gameData.sequenceNum].videos[0] != undefined){
-		$('#removeVideoContainer').show();	
+function loadEditVideo() {
+	if (gameData.targetArray[gameData.sequenceNum].videos[0] != undefined) {
+		$('#removeVideoContainer').show();
 	}
-	
-	if(gameData.targetArray[gameData.sequenceNum].videos[0] == undefined){
+
+	if (gameData.targetArray[gameData.sequenceNum].videos[0] == undefined) {
 		$('.resetVideo').val('');
 		$('#videoAutoplay').prop("selectedIndex", 0);
 		$('#videoControls').prop("selectedIndex", 0);
-		return;	
+		return;
 	}
-	
-	if(gameData.targetArray[gameData.sequenceNum].videos[0].types == undefined){
+
+	if (gameData.targetArray[gameData.sequenceNum].videos[0].types == undefined) {
 		$('.resetVideo').val('');
 		$('#videoAutoplay').prop("selectedIndex", 0);
 		$('#videoControls').prop("selectedIndex", 0);
-		return;		
+		return;
 	}
-	
-	if(gameData.targetArray[gameData.sequenceNum].videos[0].types.length <= 0){
+
+	if (gameData.targetArray[gameData.sequenceNum].videos[0].types.length <= 0) {
 		$('.resetVideo').val('');
 		$('#videoAutoplay').prop("selectedIndex", 0);
 		$('#videoControls').prop("selectedIndex", 0);
-		return;	
+		return;
 	}
-	
+
 	var videoEmbed = gameData.targetArray[gameData.sequenceNum].videos[0].embed == undefined ? 'html' : gameData.targetArray[gameData.sequenceNum].videos[0].embed;
-	
+
 	$('#videoTypeWrapper, #youtubeTypeWrapper').hide();
-	
-	if(videoEmbed == 'html'){
+
+	if (videoEmbed == 'html') {
 		$('#videoTypeWrapper').show();
 		$('#videoAutoplayField').show();
 		$('#videoControlsField').show();
-	}else{
+	} else {
 		$('#youtubeTypeWrapper').show();
 		$('#videoAutoplayField').hide();
-		$('#videoControlsField').hide();	
+		$('#videoControlsField').hide();
 	}
-	
+
 	var videoAutoplay = getEditBoolean(gameData.targetArray[gameData.sequenceNum].videos[0].autoplay);
 	var videoControls = getEditBoolean(gameData.targetArray[gameData.sequenceNum].videos[0].controls);
 	var videoType = gameData.targetArray[gameData.sequenceNum].videos[0].types[edit.videoNum].type;
-	
-	if(videoType == undefined){
+
+	if (videoType == undefined) {
 		videoType = 0;
-	}else{
-		if(videoType == 'video/mp4'){
-			videoType = 0;	
-		}else if(videoType == 'video/webm'){
+	} else {
+		if (videoType == 'video/mp4') {
+			videoType = 0;
+		} else if (videoType == 'video/webm') {
 			videoType = 1;
-		}else if(videoType == 'video/ogg'){
+		} else if (videoType == 'video/ogg') {
 			videoType = 2;
 		}
 	}
-	
+
 	$('#videotype').prop("selectedIndex", videoType);
-	if($('#videoEmbed').val() == 'youtube'){
+	if ($('#videoEmbed').val() == 'youtube') {
 		$('#youtubeSrc').val(gameData.targetArray[gameData.sequenceNum].videos[0].types[edit.videoNum].src);
-	}else{
-		$('#videoSrc').val(gameData.targetArray[gameData.sequenceNum].videos[0].types[edit.videoNum].src);	
+	} else {
+		$('#videoSrc').val(gameData.targetArray[gameData.sequenceNum].videos[0].types[edit.videoNum].src);
 	}
 	$('#videoWidth').val(gameData.targetArray[gameData.sequenceNum].videos[0].width);
 	$('#videoHeight').val(gameData.targetArray[gameData.sequenceNum].videos[0].height);
@@ -1213,15 +1215,15 @@ function loadEditVideo(){
  * UPDATE VIDEO - This is the function that runs to update video value
  * 
  */
-function updateVideo(){
-	if(gameData.targetArray[gameData.sequenceNum].videos[0] == undefined){
-		return;	
+function updateVideo() {
+	if (gameData.targetArray[gameData.sequenceNum].videos[0] == undefined) {
+		return;
 	}
-	
-	if(gameData.targetArray[gameData.sequenceNum].videos[0].types.length <= 0){
-		return;	
+
+	if (gameData.targetArray[gameData.sequenceNum].videos[0].types.length <= 0) {
+		return;
 	}
-	
+
 	//update array
 	var videoWidth = $('#videoWidth').val();
 	videoWidth = videoWidth == 0 ? undefined : videoWidth;
@@ -1231,7 +1233,7 @@ function updateVideo(){
 	videoTop = videoTop == 0 ? undefined : videoTop;
 	var videoLeft = $('#videoLeft').val();
 	videoLeft = videoLeft == 0 ? undefined : videoLeft;
-	
+
 	gameData.targetArray[gameData.sequenceNum].videos[0].width = videoWidth;
 	gameData.targetArray[gameData.sequenceNum].videos[0].height = videoHeight;
 	gameData.targetArray[gameData.sequenceNum].videos[0].top = videoTop;
@@ -1239,140 +1241,140 @@ function updateVideo(){
 	gameData.targetArray[gameData.sequenceNum].videos[0].autoplay = $('#videoAutoplay').val();
 	gameData.targetArray[gameData.sequenceNum].videos[0].controls = $('#videoControls').val();
 	gameData.targetArray[gameData.sequenceNum].videos[0].embed = $('#videoEmbed').val();
-	
-	if(gameData.targetArray[gameData.sequenceNum].videos[0].types.length > 0){
-		if($('#videoEmbed').val() == 'youtube'){
+
+	if (gameData.targetArray[gameData.sequenceNum].videos[0].types.length > 0) {
+		if ($('#videoEmbed').val() == 'youtube') {
 			gameData.targetArray[gameData.sequenceNum].videos[0].types[edit.videoNum].src = $('#youtubeSrc').val();
 			gameData.targetArray[gameData.sequenceNum].videos[0].types[edit.videoNum].type = 'youtube';
-		}else{
+		} else {
 			gameData.targetArray[gameData.sequenceNum].videos[0].types[edit.videoNum].src = $('#videoSrc').val();
 			gameData.targetArray[gameData.sequenceNum].videos[0].types[edit.videoNum].type = $('#videotype').val();
 		}
 	}
-	
+
 	//update XML
-	if($(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos').length == 0){
-		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).append('<videos/>');	
+	if ($(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos').length == 0) {
+		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).append('<videos/>');
 	}
-	
-	if($(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos video').length == 0){
-		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos').append('<video/>');	
+
+	if ($(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos video').length == 0) {
+		$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos').append('<video/>');
 	}
-	
-	if(gameData.targetArray[gameData.sequenceNum].videos[0].types.length > 0){
-		if($('#videoEmbed').val() == 'youtube'){
-			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos video').eq(edit.videoNum).html('<![CDATA['+$('#youtubeSrc').val()+']]>');
+
+	if (gameData.targetArray[gameData.sequenceNum].videos[0].types.length > 0) {
+		if ($('#videoEmbed').val() == 'youtube') {
+			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos video').eq(edit.videoNum).html('<![CDATA[' + $('#youtubeSrc').val() + ']]>');
 			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos video').eq(edit.videoNum).attr('type', 'youtube');
-		}else{
+		} else {
 			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos video').eq(edit.videoNum).html($('#videoSrc').val());
 			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos video').eq(edit.videoNum).attr('type', $('#videotype').val());
 		}
 	}
-	
-	updateXMLChild('videos','left',videoLeft, true);
-	updateXMLChild('videos','top',videoTop, true);
-	updateXMLChild('videos','width',videoWidth, true);
-	updateXMLChild('videos','height',videoHeight, true);
-	
+
+	updateXMLChild('videos', 'left', videoLeft, true);
+	updateXMLChild('videos', 'top', videoTop, true);
+	updateXMLChild('videos', 'width', videoWidth, true);
+	updateXMLChild('videos', 'height', videoHeight, true);
+
 	$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos').eq(0).attr('autoplay', $('#videoAutoplay').val());
 	$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos').eq(0).attr('controls', $('#videoControls').val());
 	$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find('videos').eq(0).attr('embed', $('#videoEmbed').val());
-	
+
 	loadEditQuestion(true);
 }
 
-function updateXMLFirst(item, attr, val, number){
-	if(number){
-		if(isNaN(val) || val == ''){
+function updateXMLFirst(item, attr, val, number) {
+	if (number) {
+		if (isNaN(val) || val == '') {
 			//not number
 			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find(item).removeAttr(attr);
-		}else{
+		} else {
 			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find(item).attr(attr, val);
 		}
-	}else{
-		if(val == ''){
+	} else {
+		if (val == '') {
 			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find(item).removeAttr(attr);
-		}else{
+		} else {
 			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find(item).attr(attr, val);
 		}
 	}
 }
 
-function updateXMLChild(item, attr, val, number){
-	var editNum = 0;	
-	if(number){
-		if(isNaN(val) || val == ''){
+function updateXMLChild(item, attr, val, number) {
+	var editNum = 0;
+	if (number) {
+		if (isNaN(val) || val == '') {
 			//not number
 			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find(item).eq(editNum).removeAttr(attr);
-		}else{
+		} else {
 			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find(item).eq(editNum).attr(attr, val);
 		}
-	}else{
-		if(val == ''){
+	} else {
+		if (val == '') {
 			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find(item).eq(editNum).removeAttr(attr);
-		}else{
+		} else {
 			$(edit.xmlFile).find('item').eq(gameData.sequenceNum).find(edit.mode).find(item).eq(editNum).attr(attr, val);
 		}
 	}
 }
 
-function getEditBoolean(data){
+function getEditBoolean(data) {
 	var videoAutoplay = 0;
-	if(data == undefined || data == 'true'){
+	if (data == undefined || data == 'true') {
 		videoAutoplay = 0;
-	}else{
-		videoAutoplay = 1;	
+	} else {
+		videoAutoplay = 1;
 	}
-	return videoAutoplay;	
+	return videoAutoplay;
 }
 
-function setBorderFocus(){
+function setBorderFocus() {
 	$('.editDrag').draggable("destroy");
 	$('.editDrag').resizable("destroy");
 	$('.editDrag').remove();
-	
+
 	$('#descriptionHolder .description').removeClass('editBorderFocus');
 	$('#backgroundHolder .background').removeClass('editBorderFocus');
-	
-	if(edit.con == 'description'){
+
+	if (edit.con == 'description') {
 		$('#descriptionHolder .description').addClass('editBorderFocus');
 		createDragArea('#descriptionHolder .description');
-	}else if(edit.con == 'background'){
+	} else if (edit.con == 'background') {
 		$('#backgroundHolder .background').addClass('editBorderFocus');
 		createDragArea('#backgroundHolder .background');
-	}else if(edit.con == 'video'){
+	} else if (edit.con == 'video') {
 		$('#videoHolder').addClass('editBorderFocus');
 		createDragArea('#videoHolder');
 	}
-	
-	$( ".editDrag" ).draggable({
-		drag: function(event, ui) {
+
+	$(".editDrag").draggable({
+		drag: function (event, ui) {
 			var target = $(this).attr('data-target');
 			$(target).css('width', $(this).css('width'));
 			$(target).css('height', $(this).css('height'));
 			$(target).css('top', $(this).css('top'));
 			$(target).css('left', $(this).css('left'));
-			
+
 			updateDragValue($(target));
 		}
 	}).resizable({
-		resize: function(event, ui) {
+		resize: function (event, ui) {
 			var target = $(this).attr('data-target');
 			$(target).css('width', $(this).css('width'));
 			$(target).css('height', $(this).css('height'));
 			$(target).css('top', $(this).css('top'));
 			$(target).css('left', $(this).css('left'));
-			
+
 			updateDragValue($(target));
 		}
 	});
 }
 
-function createDragArea(target, con){
+function createDragArea(target, con) {
 	var className = con == false ? 'editSecondIndex' : 'editFrontIndex';
-	var dragHTML = $('<div class="editDrag '+className+'"></div>');
+	var dragHTML = $('<div class="editDrag ' + className + '"></div>');
 	$(dragHTML).insertAfter(target);
-	
+
 	dragHTML.attr('data-target', target);
 	dragHTML.css('width', $(target).css('width'));
 	dragHTML.css('height', $(target).css('height'));
@@ -1380,45 +1382,45 @@ function createDragArea(target, con){
 	dragHTML.css('left', $(target).css('left'));
 }
 
-function updateDragValue(obj){
-	var value = {obj:'', top:'', left:'', width:'', height:''};
-	if(edit.con == 'description'){
+function updateDragValue(obj) {
+	var value = { obj: '', top: '', left: '', width: '', height: '' };
+	if (edit.con == 'description') {
 		value.obj = '#descriptionHolder .description';
 		value.top = '#descriptionTop';
 		value.left = '#descriptionLeft';
 		value.width = '#descriptionWidth';
 		value.height = '#descriptionHeight';
-	}else if(edit.con == 'background'){
+	} else if (edit.con == 'background') {
 		value.obj = '#backgroundHolder .background';
 		value.top = '#backgroundTop';
 		value.left = '#backgroundLeft';
 		value.width = '#backgroundWidth';
 		value.height = '#backgroundHeight';
-	}else if(edit.con == 'video'){
+	} else if (edit.con == 'video') {
 		value.obj = '#videoHolder';
 		value.top = '#videoTop';
 		value.left = '#videoLeft';
 		value.width = '#videoWidth';
 		value.height = '#videoHeight';
 	}
-	
-	$(value.top).val(getValuePercent(value.obj,'top'));
-	$(value.left).val(getValuePercent(value.obj,'left'));
-	$(value.width).val(getValuePercent(value.obj,'width'));
-	$(value.height).val(getValuePercent(value.obj,'height'));
+
+	$(value.top).val(getValuePercent(value.obj, 'top'));
+	$(value.left).val(getValuePercent(value.obj, 'left'));
+	$(value.width).val(getValuePercent(value.obj, 'width'));
+	$(value.height).val(getValuePercent(value.obj, 'height'));
 }
 
-function getValuePercent(obj, type){
+function getValuePercent(obj, type) {
 	var pos = $(obj).position();
-	
-	if(type == 'left'){
-		return Number((pos.left/$('#gameHolder').outerWidth() * 100).toFixed());
-	}else if(type == 'top'){
-		return Number((pos.top/$('#gameHolder').outerHeight() * 100).toFixed());	
-	}else if(type == 'width'){
-		return Number(($(obj).outerWidth()/$('#gameHolder').outerWidth() * 100).toFixed());
-	}else if(type == 'height'){
-		return Number(($(obj).outerHeight()/$('#gameHolder').outerHeight() * 100).toFixed());	
+
+	if (type == 'left') {
+		return Number((pos.left / $('#gameHolder').outerWidth() * 100).toFixed());
+	} else if (type == 'top') {
+		return Number((pos.top / $('#gameHolder').outerHeight() * 100).toFixed());
+	} else if (type == 'width') {
+		return Number(($(obj).outerWidth() / $('#gameHolder').outerWidth() * 100).toFixed());
+	} else if (type == 'height') {
+		return Number(($(obj).outerHeight() / $('#gameHolder').outerHeight() * 100).toFixed());
 	}
 }
 
@@ -1427,35 +1429,35 @@ function getValuePercent(obj, type){
  * LOAD TEMPLATE JSON - This is the function that runs to load template json file
  * 
  */
-function loadTemplateJSON(src){
+function loadTemplateJSON(src) {
 	$.ajax({
-       url: src,
-       type: "GET",
-       dataType: "json",
-       success: function (result) {
-		    edit.templateFile = result;
-		    
-		   if(IsJsonString($("#question_details", top.document).val())){
-			    var detailsJSON = JSON.parse($("#question_details", top.document).val());
+		url: src,
+		type: "GET",
+		dataType: "json",
+		success: function (result) {
+			edit.templateFile = result;
+
+			if (IsJsonString($("#question_details", top.document).val())) {
+				var detailsJSON = JSON.parse($("#question_details", top.document).val());
 				pushJSONDataArray(detailsJSON);
-		   }else{
-			   pushJSONDataArray(edit.templateFile[0]);
-		   }
-		    
-		    gameData.targetArray = quesLandscape_arr;
+			} else {
+				pushJSONDataArray(edit.templateFile[0]);
+			}
+
+			gameData.targetArray = quesLandscape_arr;
 			loadEditPage();
-			goPage('game');   
-       }
+			goPage('game');
+		}
 	});
 }
 
 function IsJsonString(str) {
-    try {
-        JSON.parse(str);
-    } catch (e) {
-        return false;
-    }
-    return true;
+	try {
+		JSON.parse(str);
+	} catch (e) {
+		return false;
+	}
+	return true;
 }
 
 /*!
@@ -1463,106 +1465,106 @@ function IsJsonString(str) {
  * OUTPUT JSON DATA - This is the function that runs to output json data
  * 
  */
-function outputJSON(){
+function outputJSON() {
 	var landscapeOuput = getJSONData(quesLandscape_arr[0]);
 	var portraitOuput = getJSONData(quesPortrait_arr[0]);
-	
-	var output = '{"landscape": {'+landscapeOuput+'}, "portrait":{'+portraitOuput+ '}}';
-	
+
+	var output = '{"landscape": {' + landscapeOuput + '}, "portrait":{' + portraitOuput + '}}';
+
 	try {
 		var jsonObj = JSON.parse(output);
 		var jsonPretty = JSON.stringify(jsonObj, null, '\t');
 		$("#question_details", top.document).val(jsonPretty);
 	}
-	catch(err) {
+	catch (err) {
 		alert('Invalid data, can\'t convert to JSON format!');
 	}
 }
 
-function getJSONData(array){
+function getJSONData(array) {
 	var questionOutput = '';
 	var videosOutput = '';
 	var videoListOutput = '';
 	var descriptionOutput = '';
 	var backgroundOutput = '';
 
-	$.each(array, function(key, value){
-		if(value != undefined){
-			if(key == 'background'){
-				$.each(value, function(bgKey, bgValue){
-					if(bgValue != undefined && bgValue != ''){
-						backgroundOutput += JSON.stringify(bgKey)+':'+JSON.stringify(bgValue)+',';
+	$.each(array, function (key, value) {
+		if (value != undefined) {
+			if (key == 'background') {
+				$.each(value, function (bgKey, bgValue) {
+					if (bgValue != undefined && bgValue != '') {
+						backgroundOutput += JSON.stringify(bgKey) + ':' + JSON.stringify(bgValue) + ',';
 					}
 				});
-				if(backgroundOutput != ''){
-					backgroundOutput = backgroundOutput.substring(0,backgroundOutput.length-1);
-					backgroundOutput = '"background":{'+backgroundOutput+'}';
+				if (backgroundOutput != '') {
+					backgroundOutput = backgroundOutput.substring(0, backgroundOutput.length - 1);
+					backgroundOutput = '"background":{' + backgroundOutput + '}';
 				}
-			}else if(key == 'description'){
-				$.each(value, function(descKey, descValue){
-					if(descValue != undefined && descValue != ''){
-						descriptionOutput += JSON.stringify(descKey)+':'+JSON.stringify(descValue)+',';
+			} else if (key == 'description') {
+				$.each(value, function (descKey, descValue) {
+					if (descValue != undefined && descValue != '') {
+						descriptionOutput += JSON.stringify(descKey) + ':' + JSON.stringify(descValue) + ',';
 					}
 				});
-				if(descriptionOutput != ''){
-					descriptionOutput = descriptionOutput.substring(0,descriptionOutput.length-1);
-					descriptionOutput = '"explanation":{'+descriptionOutput+'}';
+				if (descriptionOutput != '') {
+					descriptionOutput = descriptionOutput.substring(0, descriptionOutput.length - 1);
+					descriptionOutput = '"explanation":{' + descriptionOutput + '}';
 				}
-			}else if(key == 'videos'){
-				$.each(value[0], function(videosKey, videosValue){
+			} else if (key == 'videos') {
+				$.each(value[0], function (videosKey, videosValue) {
 					//console.log(videosKey + " : " + videosValue);
-					if(videosValue != undefined && videosValue != ''){
-						if(videosKey == 'types'){
-							for(var n=0; n<array.videos[0].types.length; n++){
+					if (videosValue != undefined && videosValue != '') {
+						if (videosKey == 'types') {
+							for (var n = 0; n < array.videos[0].types.length; n++) {
 								var videoOutput = '';
-								$.each(array.videos[0].types[n], function(videoKey, videoValue){
-									if(videoValue != undefined && videoValue != ''){
-										videoOutput += JSON.stringify(videoKey)+':'+JSON.stringify(videoValue)+',';
+								$.each(array.videos[0].types[n], function (videoKey, videoValue) {
+									if (videoValue != undefined && videoValue != '') {
+										videoOutput += JSON.stringify(videoKey) + ':' + JSON.stringify(videoValue) + ',';
 									}
 								});
-								
-								if(videoOutput != ''){
-									videoOutput = videoOutput.substring(0,videoOutput.length-1);
-									videoListOutput += '{'+videoOutput+'},';
+
+								if (videoOutput != '') {
+									videoOutput = videoOutput.substring(0, videoOutput.length - 1);
+									videoListOutput += '{' + videoOutput + '},';
 								}
 							}
-							
-							if(videoListOutput != ''){
-								videoListOutput = videoListOutput.substring(0,videoListOutput.length-1);
-								videoListOutput = '"video":['+videoListOutput+']';
+
+							if (videoListOutput != '') {
+								videoListOutput = videoListOutput.substring(0, videoListOutput.length - 1);
+								videoListOutput = '"video":[' + videoListOutput + ']';
 							}
-						}else{
-							videosOutput += JSON.stringify(videosKey)+':'+JSON.stringify(videosValue)+',';
+						} else {
+							videosOutput += JSON.stringify(videosKey) + ':' + JSON.stringify(videosValue) + ',';
 						}
 					}
 				});
-				if(videoListOutput != '' || videosOutput != ''){
-					if(videoListOutput == ''){
-						videosOutput = videosOutput.substring(0,videosOutput.length-1);
+				if (videoListOutput != '' || videosOutput != '') {
+					if (videoListOutput == '') {
+						videosOutput = videosOutput.substring(0, videosOutput.length - 1);
 					}
-					videosOutput = '"videos":{'+videosOutput+videoListOutput+'}';
+					videosOutput = '"videos":{' + videosOutput + videoListOutput + '}';
 				}
-			}else{
+			} else {
 				//console.log(key + " : " + value);
-				questionOutput += JSON.stringify(key)+':'+JSON.stringify(value)+',';
+				questionOutput += JSON.stringify(key) + ':' + JSON.stringify(value) + ',';
 			}
 		}
 	});
-	
-	if(questionOutput != ''){
-		questionOutput = questionOutput.substring(0,questionOutput.length-1);
-		questionOutput = '"question":{'+questionOutput+'}';
+
+	if (questionOutput != '') {
+		questionOutput = questionOutput.substring(0, questionOutput.length - 1);
+		questionOutput = '"question":{' + questionOutput + '}';
 	}
 	var finalOuput = questionOutput;
-	if(videosOutput != ''){
-		finalOuput += ','+videosOutput;
+	if (videosOutput != '') {
+		finalOuput += ',' + videosOutput;
 	}
-	if(descriptionOutput != ''){
-		finalOuput += ','+descriptionOutput;
+	if (descriptionOutput != '') {
+		finalOuput += ',' + descriptionOutput;
 	}
-	if(backgroundOutput != ''){
-		finalOuput += ','+backgroundOutput;
+	if (backgroundOutput != '') {
+		finalOuput += ',' + backgroundOutput;
 	}
-	
+
 	return finalOuput;
 }

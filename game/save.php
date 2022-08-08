@@ -1,6 +1,6 @@
 <?php
 
-$saveEnable = false;
+$saveEnable = true;
 $savePassord = '12345';
 
 $password = isset($_POST['password']) == 1 ? $_POST['password'] : '';
