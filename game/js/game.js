@@ -20,9 +20,13 @@ function hideFontQuestionAndShowTheWord(currentWordOfGame) {
     $('.fontQuestion').html(currentWordOfGame);
     console.log('hideFontQuestionAndShowTheWord is running');
 }
-function reverseString(str) {
-    return str.split('').reverse().join('')
+function reverseWordArray(arr) {
+    arr.slice()
+    arr.reverse();
+    console.log(arr);
+    return arr;
 }
+
 // GAME SETTING CUSTOMIZATION END
 
 
@@ -1188,6 +1192,8 @@ function buildQuestion() {
     questionData.pos = [];
     questionData.abandon = [];
     questionData.abandonPos = [];
+
+    reverseWordArray(questionData.word)
 
     for (var n = 0; n < questionData.sentence.length; n++) {
         var currentWord = '<div class="fontQuestion resizeFont draggable" data-fontSize="' + questionData.value.fontSize + '" data-lineHeight="' + questionData.value.lineHeight + '" data-shadow="' + questionData.value.shadow + '" data-shadowhover="' + questionData.value.shadowHover + '" style="font-size:' + questionData.value.fontSize + 'px; line-height:' + questionData.value.lineHeight + 'px; color:' + questionData.value.color + '; position:absolute;">' + questionData.sentence[n] + '</div>';
