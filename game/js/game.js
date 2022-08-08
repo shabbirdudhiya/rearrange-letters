@@ -20,6 +20,9 @@ function hideFontQuestionAndShowTheWord(currentWordOfGame) {
     $('.fontQuestion').html(currentWordOfGame);
     console.log('hideFontQuestionAndShowTheWord is running');
 }
+function reverseString(str) {
+    return str.split('').reverse().join('')
+}
 // GAME SETTING CUSTOMIZATION END
 
 
@@ -39,7 +42,7 @@ var screenSettings = {
 
 //title settings
 var titleSettings = {
-    text: ["REARRANGE", "LETTERS|2"], //array for new lines, use | for spacing
+    text: ["إعادة ترتيب الحروف"], //array for new lines, use | for spacing
     fontSize: 120,
     lineHeight: 120,
     shadow: 15,
@@ -830,23 +833,26 @@ function saveGame(score, type) {
  */
 function buildTitle() {
     var currentText = titleSettings.text;
+    // for (var n = 0; n < titleSettings.text.length; n++) {
+    //     var thisArray = titleSettings.text[n].split("");
+    //     for (var a = 0; a < thisArray.length; a++) {
+    //         titleData.title.push(thisArray[a]);
+    //     }
+    // }
+    var currentWord = '<div class="fontQuestion resizeFont titleWord" data-fontSize="' + titleSettings.fontSize + '" data-lineHeight="' + titleSettings.lineHeight + '" data-shadow="' + titleSettings.shadow + '" style="font-size:' + titleSettings.fontSize + 'px; line-height:' + titleSettings.lineHeight + 'px; color:' + titleSettings.color + '; position:absolute;">' + currentText + '</div>';
+    $('#titleHolder').append(currentWord);
+    var currentWord = '<div class="fontQuestion resizeFont titleFixedWord" data-fontSize="' + titleSettings.fontSize + '" data-lineHeight="' + titleSettings.lineHeight + '" data-shadow="' + titleSettings.shadow + '" style="font-size:' + titleSettings.fontSize + 'px; line-height:' + titleSettings.lineHeight + 'px; color:' + titleSettings.color + '; position:absolute;">' + currentText + '</div>';
+    $('#titleFixedHolder').append(currentWord);
 
-    for (var n = 0; n < titleSettings.text.length; n++) {
-        var thisArray = titleSettings.text[n].split("");
-        for (var a = 0; a < thisArray.length; a++) {
-            titleData.title.push(thisArray[a]);
-        }
-    }
+    // for (var n = 0; n < titleData.title.length; n++) {
+    //     var currentWord = '<div class="fontQuestion resizeFont titleWord" data-fontSize="' + titleSettings.fontSize + '" data-lineHeight="' + titleSettings.lineHeight + '" data-shadow="' + titleSettings.shadow + '" style="font-size:' + titleSettings.fontSize + 'px; line-height:' + titleSettings.lineHeight + 'px; color:' + titleSettings.color + '; position:absolute;">' + titleData.title[n] + '</div>';
+    //     $('#titleHolder').append(currentWord);
 
-    for (var n = 0; n < titleData.title.length; n++) {
-        var currentWord = '<div class="fontQuestion resizeFont titleWord" data-fontSize="' + titleSettings.fontSize + '" data-lineHeight="' + titleSettings.lineHeight + '" data-shadow="' + titleSettings.shadow + '" style="font-size:' + titleSettings.fontSize + 'px; line-height:' + titleSettings.lineHeight + 'px; color:' + titleSettings.color + '; position:absolute;">' + titleData.title[n] + '</div>';
-        $('#titleHolder').append(currentWord);
+    //     var currentWord = '<div class="fontQuestion resizeFont titleFixedWord" data-fontSize="' + titleSettings.fontSize + '" data-lineHeight="' + titleSettings.lineHeight + '" data-shadow="' + titleSettings.shadow + '" style="font-size:' + titleSettings.fontSize + 'px; line-height:' + titleSettings.lineHeight + 'px; color:' + titleSettings.color + '; position:absolute;">' + titleData.title[n] + '</div>';
+    //     $('#titleFixedHolder').append(currentWord);
 
-        var currentWord = '<div class="fontQuestion resizeFont titleFixedWord" data-fontSize="' + titleSettings.fontSize + '" data-lineHeight="' + titleSettings.lineHeight + '" data-shadow="' + titleSettings.shadow + '" style="font-size:' + titleSettings.fontSize + 'px; line-height:' + titleSettings.lineHeight + 'px; color:' + titleSettings.color + '; position:absolute;">' + titleData.title[n] + '</div>';
-        $('#titleFixedHolder').append(currentWord);
-
-        titleData.shuffle.push(n);
-    }
+    //     titleData.shuffle.push(n);
+    // }
 
     checkTitleWordData();
     positionTitle();
